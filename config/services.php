@@ -42,4 +42,15 @@ return [
         'temperature' => (float) env('OPENAI_TEMPERATURE', 0.7),
     ],
 
+    'localrydes' => [
+        'base_url' => rtrim((string) env('LOCALRYDES_API_BASE_URL', 'https://www.localrydes.com/api/v2/external'), '/'),
+        'key' => env('LOCALRYDES_API_KEY'),
+        'timeout' => (int) env('LOCALRYDES_API_TIMEOUT', 10),
+        'verify_ssl' => (bool) env('LOCALRYDES_API_VERIFY_SSL', true),
+        'cache_ttl' => (int) env('LOCALRYDES_API_CACHE_TTL', 300),
+        // Website used for the payment page: {web_url}/reservation-payment-create/{reservation uuid}
+        'web_url' => rtrim((string) env('LOCALRYDES_WEB_URL', 'https://www.localrydes.com'), '/'),
+        'payment_redirect_seconds' => (int) env('LOCALRYDES_PAYMENT_REDIRECT_SECONDS', 3),
+    ],
+
 ];

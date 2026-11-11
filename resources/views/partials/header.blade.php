@@ -22,6 +22,7 @@
         ['label' => 'Solution', 'href' => '/products',                     'match' => 'products*'],
         ['label' => 'Training', 'href' => '/management-training',          'match' => 'management-training*'],
         ['label' => 'Events',   'href' => '/events',                       'match' => 'events*'],
+        ['label' => 'Offers',   'href' => '/special-offers',               'match' => 'special-offers*'],
         ['label' => 'Travel',   'href' => '/services/travel-experiences',  'match' => 'services/travel-experiences*'],
         ['label' => 'Insights', 'href' => '/insights',                     'match' => 'insights*'],
     ];
