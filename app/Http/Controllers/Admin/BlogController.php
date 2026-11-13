@@ -17,6 +17,7 @@ class BlogController extends Controller
 
         return view('admin.blogs.index', compact('blogs'));
     }
+    
 
     public function create(): View
     {
