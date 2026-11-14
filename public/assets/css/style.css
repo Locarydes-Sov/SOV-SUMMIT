@@ -127,9 +127,29 @@ body:not(.has-hero) { padding-top: var(--header-h); }
 }
 
 .brand img {
-    height: 40px;
+    height: 32px;
     width: auto;
     display: block;
+}
+
+/* Two logos: white over the hero (transparent header), gold once the header is solid */
+.brand { position: relative; }
+.brand-logo { transition: opacity 0.35s ease; }
+.brand-logo--transparent { position: absolute; left: 0; top: 50%; transform: translateY(-50%); opacity: 0; }
+.brand-logo--sticky { opacity: 1; }
+body.has-hero .site-header:not(.is-scrolled) .brand-logo--transparent { opacity: 1; }
+body.has-hero .site-header:not(.is-scrolled) .brand-logo--sticky { opacity: 0; }
+
+@media (max-width: 1360px) {
+    .brand img { height: 26px; }
+}
+
+@media (max-width: 900px) {
+    .brand img { height: 28px; }
+}
+
+@media (max-width: 420px) {
+    .brand img { height: 22px; }
 }
 
 nav.primary-nav {
@@ -244,7 +264,8 @@ nav.primary-nav a:not(.nav-cta)[aria-current="page"] {
     cursor: pointer;
 }
 
-@media (max-width: 900px) {
+/* Switch to the Menu button before the long nav overflows */
+@media (max-width: 1240px) {
     nav.primary-nav { display: none; }
     .nav-toggle { display: inline-flex; align-items: center; gap: 0.4rem; }
     body.nav-open nav.primary-nav {

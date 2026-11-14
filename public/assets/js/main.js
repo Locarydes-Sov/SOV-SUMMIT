@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // On touch/small screens, tapping a dropdown parent link toggles its submenu
     document.querySelectorAll(".has-dropdown > a").forEach(function (link) {
         link.addEventListener("click", function (e) {
-            if (window.innerWidth <= 900) {
+            if (window.innerWidth <= 1240) {
                 var parent = link.parentElement;
                 var isOpen = parent.classList.contains("open");
                 document.querySelectorAll(".has-dropdown.open").forEach(function (el) {

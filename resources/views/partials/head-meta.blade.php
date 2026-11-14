@@ -9,8 +9,12 @@
 <title>{{ $pageTitle }}</title>
 <meta name="description" content="{{ $pageDescription }}" />
 <link rel="canonical" href="{{ $canonicalUrl }}" />
-<link rel="icon" type="image/png" href="{{ asset('assets/img/logo-2.png') }}" />
-<link rel="apple-touch-icon" href="{{ asset('assets/img/logo-2.png') }}" />
+<link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any" />
+<link rel="icon" type="image/svg+xml" href="{{ asset('assets/img/logo/favicon.svg') }}" />
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/logo/favicon-32.png') }}" />
+<link rel="icon" type="image/png" sizes="192x192" href="{{ asset('assets/img/logo/favicon-192.png') }}" />
+<link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/logo/apple-touch-icon.png') }}" />
+<meta name="theme-color" content="#0a0806" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content="{{ $pageTitle }}" />
 <meta property="og:description" content="{{ $pageDescription }}" />

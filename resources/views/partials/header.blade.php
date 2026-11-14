@@ -30,7 +30,8 @@
 <header class="site-header">
   <div class="bar">
     <a class="brand" href="/" aria-label="SOV SUMMIT — home">
-      <img src="{{ asset('assets/img/logo-2.png') }}" alt="SOV SUMMIT" width="160" height="53" />
+      <img class="brand-logo brand-logo--transparent" src="{{ asset('assets/img/logo/sov-summit_header_white.webp') }}" alt="SOV SUMMIT" width="688" height="96" />
+      <img class="brand-logo brand-logo--sticky" src="{{ asset('assets/img/logo/sov-summit_header_gold.webp') }}" alt="" aria-hidden="true" width="688" height="96" />
     </a>
     <nav class="primary-nav" aria-label="Primary">
       <ul>
