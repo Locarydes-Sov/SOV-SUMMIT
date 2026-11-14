@@ -126,6 +126,14 @@ return [
             'replace_placeholders' => true,
         ],
 
+        'localrydes' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/localrydes.log'),
+            'level' => env('LOCALRYDES_LOG_LEVEL', 'debug'),
+            'days' => (int) env('LOCALRYDES_LOG_DAYS', 30),
+            'replace_placeholders' => true,
+        ],
+
         'null' => [
             'driver' => 'monolog',
             'handler' => NullHandler::class,

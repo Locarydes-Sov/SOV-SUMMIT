@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CommentCategoryController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\InvoiceController;
+use App\Http\Controllers\Admin\LogController;
 use App\Http\Controllers\Admin\MediaUploadController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Admin\SectionController;
@@ -92,6 +93,10 @@ Route::middleware('auth')->group(function () {
         Route::resource('comment-categories', CommentCategoryController::class)
             ->parameters(['comment-categories' => 'comment_category'])
             ->except(['show']);
+
+        Route::get('logs', [LogController::class, 'index'])->name('logs.index');
+        Route::post('logs/localrydes/test-connection', [LogController::class, 'testConnection'])->name('logs.localrydes.test-connection');
+        Route::post('logs/localrydes/clear-cache', [LogController::class, 'clearCache'])->name('logs.localrydes.clear-cache');
 
         Route::get('sections/templates', [SectionController::class, 'templates'])->name('sections.templates');
         Route::post('sections', [SectionController::class, 'store'])->name('sections.store');

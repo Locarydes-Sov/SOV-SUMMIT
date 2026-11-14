@@ -5324,8 +5324,8 @@ section.tight { padding: clamp(2.2rem, 4vw, 3.5rem) 0; }
     border: 0;
     font-family: var(--font-serif);
     font-weight: 400;
-    font-size: clamp(1.6rem, 2.6vw, 2.3rem);
-    line-height: 1.35;
+    font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+    line-height: 1.45;
     color: var(--ink);
 }
 .voices__author {
@@ -5363,4 +5363,16 @@ section.tight { padding: clamp(2.2rem, 4vw, 3.5rem) 0; }
 @media (prefers-reduced-motion: reduce) {
     .voices__slide { transition: none; transform: none; }
     .voices__progress { display: none; }
+}
+.voices__sample {
+    position: absolute;
+    top: 0.9rem;
+    right: 1rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px dashed rgba(169, 129, 46, 0.6);
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
 }

@@ -89,6 +89,13 @@
                     Comment Categories
                 </a>
 
+                @php $isLogs = request()->routeIs('admin.logs.*'); @endphp
+                <a href="{{ route('admin.logs.index') }}"
+                   class="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium mb-1 {{ $isLogs ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100' }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h6a1 1 0 110 2H4a1 1 0 01-1-1zm11-3.5a1 1 0 011 1V15h1.5a1 1 0 110 2H15a1 1 0 01-1-1v-2.5a1 1 0 011-1z" clip-rule="evenodd"/></svg>
+                    Logs
+                </a>
+
                 <div class="px-2 pt-6 pb-2 text-[10px] font-semibold uppercase tracking-widest text-slate-400">External</div>
                 <a href="{{ url('/') }}" target="_blank"
                    class="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm font-medium mb-1 text-slate-700 hover:bg-slate-100">
@@ -131,6 +138,11 @@
             @if (session('status'))
                 <div class="mx-6 mt-4 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 text-sm">
                     {{ session('status') }}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="mx-6 mt-4 rounded-md bg-red-50 border border-red-200 text-red-800 px-4 py-3 text-sm">
+                    {{ session('error') }}
                 </div>
             @endif
 

@@ -290,13 +290,22 @@
 </section>
 
 @php
-    // Replace these with real, approved client testimonials.
-    $testimonials = [
-        ['quote' => '[Client quote about the delegation programme]', 'name' => '[Client name]', 'role' => '[Title, Organisation]', 'sector' => 'Government delegation'],
-        ['quote' => '[Client quote about the summit or conference]', 'name' => '[Client name]', 'role' => '[Title, Organisation]', 'sector' => 'Corporate summit'],
-        ['quote' => '[Client quote about a private event]', 'name' => '[Client name]', 'role' => '[Title, Organisation]', 'sector' => 'Private client'],
-    ];
+    // Real, approved client testimonials go here. While this list is empty the section is hidden on the live site.
+    $testimonials = [];
+
+    // Sample text for checking the design on a local machine only. Never shown when APP_ENV is not "local".
+    $isSampleTestimonials = $testimonials === [] && app()->isLocal();
+    if ($isSampleTestimonials) {
+        $testimonials = [
+            ['sector' => 'Corporate Summit', 'quote' => 'Working with SOV Summit was an excellent experience. Their professionalism, attention to detail, and ability to manage every aspect of the event made the entire process seamless. We look forward to working together again.', 'name' => 'James Richardson', 'role' => 'Managing Director, Global Business Group'],
+            ['sector' => 'International Conference', 'quote' => 'SOV Summit demonstrated exceptional expertise in coordinating our international conference. From the initial planning to the final execution, everything was handled with precision and professionalism.', 'name' => 'Sarah Mitchell', 'role' => 'Conference Director, International Events Council'],
+            ['sector' => 'Executive Training', 'quote' => 'The training programme was thoughtfully designed and professionally delivered. The team created an engaging environment that encouraged meaningful discussions, knowledge sharing, and valuable connections.', 'name' => 'Alexander Bennett', 'role' => 'Head of Learning & Development, Apex Consulting'],
+            ['sector' => 'Government & Institutional Events', 'quote' => 'Delivering an event of this scale requires strong coordination, strategic thinking, and attention to every detail. SOV Summit exceeded our expectations and ensured a smooth and successful experience.', 'name' => 'Olivia Thompson', 'role' => 'Senior Programme Manager, Global Policy Institute'],
+            ['sector' => 'Strategic Partnership', 'quote' => 'What truly sets SOV Summit apart is their commitment to quality and collaborative approach. They understood our vision and transformed it into an experience that was both impactful and memorable.', 'name' => 'Daniel Foster', 'role' => 'Chief Executive Officer, Horizon International Group'],
+        ];
+    }
 @endphp
+@if ($testimonials !== [])
 <section class="voices" aria-labelledby="voices-heading" data-voices>
   <div class="container voices__grid">
     <div class="voices__intro">
@@ -317,10 +326,13 @@
 
     <div class="voices__stage" aria-live="polite">
       <span class="voices__mark" aria-hidden="true">&ldquo;</span>
+      @if ($isSampleTestimonials)
+        <span class="voices__sample">Sample data &middot; local only</span>
+      @endif
       @foreach ($testimonials as $index => $t)
         <figure class="voices__slide {{ $index === 0 ? 'is-active' : '' }}" data-voices-slide @if ($index !== 0) aria-hidden="true" @endif>
           <span class="voices__sector">{{ $t['sector'] }}</span>
-          <blockquote class="voices__quote">{{ $t['quote'] }}</blockquote>
+          <blockquote class="voices__quote">{{ \Illuminate\Support\Str::limit($t['quote'], 100, preserveWords: true) }}</blockquote>
           <figcaption class="voices__author">
             <strong>{{ $t['name'] }}</strong>
             <span>{{ $t['role'] }}</span>
@@ -331,6 +343,7 @@
     </div>
   </div>
 </section>
+@endif
 
 <section class="connect" aria-labelledby="connect-heading">
   <div class="connect__glow" aria-hidden="true"></div>
