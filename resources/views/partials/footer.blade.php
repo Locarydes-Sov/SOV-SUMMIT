@@ -2,7 +2,7 @@
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <img src="{{ asset('assets/img/logo-2.png') }}" alt="SOV SUMMIT" width="170" height="57" />
+        <img class="footer-logo" src="{{ asset('assets/img/logo/sov-summit_header_gold.webp') }}" alt="SOV SUMMIT" width="688" height="96" loading="lazy" />
         <p class="brandline">PEOPLE &middot; IDEAS &middot; IMPACT<br>Planning. Connecting. Delivering.</p>
         <p>SOV SUMMIT coordinates international events, management training, delegations, travel experiences, security support, and media coverage for organisations, corporations, institutions, and private clients.</p>
       </div>

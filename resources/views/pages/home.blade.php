@@ -45,142 +45,172 @@
 
 @section('content')
 
-<section class="hero" id="hero">
+<section class="hero hero--split" id="hero">
   <div class="hero-bg" aria-hidden="true">
-    <div class="hero-aura"></div>
-    <div class="hero-gradient hero-gradient--tr"></div>
-    <div class="hero-gradient hero-gradient--bl"></div>
     <div class="hero-grain"></div>
   </div>
 
-  <div class="container hero-inner">
-    <div class="hero-grid">
-      <div class="hero-lead">
-        <div class="brand-rule" aria-hidden="true">
-          <span class="brand-rule__line"></span>
-          <span class="brand-rule__dot"></span>
-        </div>
-        <p class="brandline reveal" data-reveal="up">PEOPLE <span class="brandline-dot">&middot;</span> IDEAS <span class="brandline-dot">&middot;</span> IMPACT</p>
-        <div class="hero-diagram hero-diagram--inline" aria-label="How SOV SUMMIT delivers a successful event">
-          <div class="hero-diagram__orbit hero-diagram__orbit--outer" aria-hidden="true"></div>
-          <div class="hero-diagram__orbit hero-diagram__orbit--mid" aria-hidden="true"></div>
-          <div class="hero-diagram__orbit hero-diagram__orbit--inner" aria-hidden="true"></div>
-          <div class="hero-diagram__ring">
-            <svg class="hero-diagram__lines" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
-              <defs>
-                <radialGradient id="heroDiagramGlowInline" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="rgba(201,162,75,0.8)"/>
-                  <stop offset="100%" stop-color="rgba(201,162,75,0)"/>
-                </radialGradient>
-              </defs>
-              <circle class="hero-diagram__halo" cx="200" cy="200" r="80" fill="url(#heroDiagramGlowInline)"/>
-              <line class="hero-diagram__line" data-line="1" x1="200" y1="200" x2="200" y2="60"/>
-              <line class="hero-diagram__line" data-line="2" x1="200" y1="200" x2="322" y2="130"/>
-              <line class="hero-diagram__line" data-line="3" x1="200" y1="200" x2="322" y2="270"/>
-              <line class="hero-diagram__line" data-line="4" x1="200" y1="200" x2="200" y2="340"/>
-              <line class="hero-diagram__line" data-line="5" x1="200" y1="200" x2="78" y2="270"/>
-              <line class="hero-diagram__line" data-line="6" x1="200" y1="200" x2="78" y2="130"/>
-              <circle class="hero-diagram__particle" data-particle="1" r="3.2" cx="200" cy="200"/>
-              <circle class="hero-diagram__particle" data-particle="2" r="3.2" cx="200" cy="200"/>
-              <circle class="hero-diagram__particle" data-particle="3" r="3.2" cx="200" cy="200"/>
-              <circle class="hero-diagram__particle" data-particle="4" r="3.2" cx="200" cy="200"/>
-              <circle class="hero-diagram__particle" data-particle="5" r="3.2" cx="200" cy="200"/>
-              <circle class="hero-diagram__particle" data-particle="6" r="3.2" cx="200" cy="200"/>
-            </svg>
+  <div class="hero-split">
+    <div class="hero-copy">
+      <p class="hero-eyebrow reveal" data-reveal="up"><span class="hero-eyebrow__line" aria-hidden="true"></span>Welcome to SOV Summit</p>
+      <h1 class="hero-headline" data-reveal-words>
+        Summits and private events, <em>orchestrated in every detail.</em>
+      </h1>
+      <p class="hero-lede reveal" data-reveal="up" data-reveal-delay="200">From venue and private aviation to security and guest logistics, a single discreet team manages it all, so you can focus on the people in the room.</p>
+      <div class="hero-actions reveal" data-reveal="up" data-reveal-delay="320">
+        <a class="hero-btn" href="/contact">
+          <span>Begin your enquiry</span>
+          <span class="hero-btn__line" aria-hidden="true"></span>
+        </a>
+        <a class="hero-link" href="/services">Discover our services</a>
+      </div>
+      <ul class="hero-assurances reveal" data-reveal="up" data-reveal-delay="440">
+        <li>Complimentary first consultation</li>
+        <li>Reply within one business day</li>
+        <li>Strictly confidential</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-            <div class="hero-diagram__center">
-              <span class="hero-diagram__pulse" aria-hidden="true"></span>
-              <svg class="hero-diagram__center-icon" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M4 8l3.5 9h9L20 8l-4.5 3L12 5 8.5 11z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
-                <path d="M6.5 19h11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-              </svg>
-              <span class="hero-diagram__center-label">Successful<br>event</span>
-            </div>
+@php
+    $heroStats = [
+        ['value' => '550+', 'label' => 'Events delivered'],
+        ['value' => '30+',  'label' => 'Countries'],
+        ['value' => '20+',  'label' => 'Heads of state hosted'],
+    ];
+    // Replace each null with a logo path, e.g. 'assets/img/clients/acme.svg'
+    $clientLogos = [null, null, null, null, null];
+@endphp
+<section class="trust-strip" aria-label="SOV SUMMIT in numbers">
+  <ul class="trust-strip__stats">
+    @foreach ($heroStats as $stat)
+      <li class="trust-strip__stat">
+        <span class="trust-strip__value">{{ $stat['value'] }}</span>
+        <span class="trust-strip__label">{{ $stat['label'] }}</span>
+      </li>
+    @endforeach
+  </ul>
+  <div class="trust-strip__clients">
+    <p class="trust-strip__heading">Trusted by governments, institutions and global organisations</p>
+    <ul class="trust-strip__logos">
+      @foreach ($clientLogos as $logo)
+        <li class="trust-strip__logo">
+          @if ($logo)
+            <img src="{{ asset($logo) }}" alt="" loading="lazy" />
+          @else
+            <span>Client logo</span>
+          @endif
+        </li>
+      @endforeach
+    </ul>
+  </div>
+</section>
 
-            <div class="hero-diagram__node" data-pos="top" data-node="1" style="--i:1">
-              <span class="hero-diagram__node-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M5 21V6l7-3 7 3v15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 21v-5h6v5M10 9h1M13 9h1M10 12h1M13 12h1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-              </span>
-              <span class="hero-diagram__node-label">Venue</span>
-            </div>
+@php
+    $founder = [
+        'name'  => 'MD Waliullah',
+        'title' => 'Founder & Managing Director, SOV Summit',
+        // Put the photo in public/assets/img/team/ and set the path here, e.g. 'assets/img/team/founder.webp'
+        'photo' => 'assets/img/team/founder.webp',
+    ];
+@endphp
+<section class="welcome" aria-labelledby="welcome-heading">
+  <div class="container welcome__grid">
+    <figure class="welcome__photo">
+      <div class="welcome__frame">
+        @if ($founder['photo'])
+          <img src="{{ asset($founder['photo']) }}" alt="{{ $founder['name'] }}, {{ $founder['title'] }}" loading="lazy" width="640" height="800" />
+        @else
+          <span class="welcome__placeholder">Photo of founder</span>
+        @endif
+      </div>
+    </figure>
 
-            <div class="hero-diagram__node" data-pos="tr" data-node="2" style="--i:2">
-              <span class="hero-diagram__node-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M12 3l1.8 8L21 13l-6 3 1 5-4-3-4 3 1-5-6-3 7.2-2z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 17.5l1.5-1.5m4.5 1.5l-1.5-1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-              </span>
-              <span class="hero-diagram__node-label">Security</span>
-            </div>
-
-            <div class="hero-diagram__node" data-pos="br" data-node="3" style="--i:3">
-              <span class="hero-diagram__node-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M4 17V9h10l3 3h3v5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="8" cy="18" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="17" cy="18" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4 17h1.5M10 17h5M19 17h1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-              </span>
-              <span class="hero-diagram__node-label">Transportation</span>
-            </div>
-
-            <div class="hero-diagram__node" data-pos="bottom" data-node="4" style="--i:4">
-              <span class="hero-diagram__node-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M3 16V8h11v8m0-6h4l3 3v3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="17" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M3 16h2.5M8.5 16h6.5M18.5 16H21" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-              </span>
-              <span class="hero-diagram__node-label">Logistics</span>
-            </div>
-
-            <div class="hero-diagram__node" data-pos="bl" data-node="5" style="--i:5">
-              <span class="hero-diagram__node-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M3 18v-5a2 2 0 012-2h9v7M3 18h18M21 18v-4h-7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 11V8h4v3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-              </span>
-              <span class="hero-diagram__node-label">Accommodation</span>
-            </div>
-
-            <div class="hero-diagram__node" data-pos="tl" data-node="6" style="--i:6">
-              <span class="hero-diagram__node-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M3 15l8-2 3-8 2 1-1 6 6-1 1 2-7 4-2 8-2-1 1-6-8 1z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-              </span>
-              <span class="hero-diagram__node-label">Private Flight</span>
-            </div>
-          </div>
-        </div>
-        <h1 class="hero-title" data-reveal-words>
-          Connecting the dots. Delivering <em>successful</em> events.
-        </h1>
-        <p class="hero-subtitle reveal" data-reveal="up" data-reveal-delay="180">International coordination for events, delegations, and executive programmes.</p>
-        <div class="cta-row reveal" data-reveal="up" data-reveal-delay="280">
-          <a class="btn btn-primary btn-magnetic" href="/services">
-            <span class="btn-label">Explore Our Services</span>
-            <span class="btn-shimmer" aria-hidden="true"></span>
-            <svg class="btn-arrow" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7h10M8 3l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a class="btn btn-secondary btn-magnetic" href="/contact">
-            <span class="btn-label">Talk with us</span>
-          </a>
-        </div>
+    <div class="welcome__copy">
+      <p class="welcome__eyebrow"><span class="welcome__eyebrow-line" aria-hidden="true"></span>A personal welcome</p>
+      <blockquote class="welcome__quote" id="welcome-heading">
+        &ldquo;Every event we host carries someone&rsquo;s reputation. <em>We treat yours as if it were our own.</em>&rdquo;
+      </blockquote>
+      <p class="welcome__text">Thank you for considering SOV Summit. Whether you are planning an intimate leadership retreat or a summit for heads of state, you will work with people who listen first, plan carefully and stay by your side until the last guest has left. We would be delighted to hear about your event.</p>
+      <div class="welcome__sign">
+        <span class="welcome__signature" aria-hidden="true">{{ $founder['name'] }}</span>
+        <span class="welcome__person">
+          <strong>{{ $founder['name'] }}</strong>
+          <span>{{ $founder['title'] }}</span>
+        </span>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="hero-meta">
-      <div class="hero-marquee" aria-hidden="true">
-        <div class="hero-marquee__track">
-          <span>Governments</span><span class="dot">&bull;</span>
-          <span>Corporations</span><span class="dot">&bull;</span>
-          <span>Institutions</span><span class="dot">&bull;</span>
-          <span>Private Clients</span><span class="dot">&bull;</span>
-          <span>Delegations</span><span class="dot">&bull;</span>
-          <span>Conferences</span><span class="dot">&bull;</span>
-          <span>Media Coverage</span><span class="dot">&bull;</span>
-          <span>Governments</span><span class="dot">&bull;</span>
-          <span>Corporations</span><span class="dot">&bull;</span>
-          <span>Institutions</span><span class="dot">&bull;</span>
-          <span>Private Clients</span><span class="dot">&bull;</span>
-          <span>Delegations</span><span class="dot">&bull;</span>
-          <span>Conferences</span><span class="dot">&bull;</span>
-          <span>Media Coverage</span><span class="dot">&bull;</span>
+@php
+    $davosSlug  = 'davos-2027-wef-annual-meeting-executive-delegation-programme';
+    $davosEvent = \App\Models\Event::query()->published()->where('slug', $davosSlug)->first();
+    $davosImage = $davosEvent?->cover_url ?: 'https://images.unsplash.com/photo-1587952134350-d10487bc1c37?auto=format&fit=crop&w=1920&q=80';
+    $davosUrl   = route('events.show', $davosSlug);
+    $davosStart = '2027-01-18T09:00:00+01:00';
+    $davosItems = [
+        ['title' => 'Accommodation',  'text' => 'Davos & Klosters, matched to delegation size and security needs.'],
+        ['title' => 'Ground transport', 'text' => 'Chauffeured cars, Zurich Airport transfers and helicopter options.'],
+        ['title' => 'Private venues', 'text' => 'Bilateral meetings, breakfasts, dinners and receptions.'],
+        ['title' => 'Security & support', 'text' => 'Security liaison, secure routing and one point of contact.'],
+    ];
+@endphp
+<section class="davos-x" aria-labelledby="davos-heading" data-davos>
+  <div class="davos-x__media" aria-hidden="true">
+    <img class="davos-x__image" src="{{ $davosImage }}" alt="" loading="lazy" width="1920" height="1080" data-davos-parallax />
+  </div>
+  <div class="davos-x__shade" aria-hidden="true"></div>
+
+  <div class="davos-x__inner">
+    <div class="davos-x__top" data-davos-reveal>
+      <span class="davos-x__eyebrow"><span class="davos-x__eyebrow-line" aria-hidden="true"></span>Featured programme</span>
+      <span class="davos-x__place">WEF Annual Meeting &middot; Davos-Klosters, Switzerland</span>
+    </div>
+
+    <div class="davos-x__main">
+      <div class="davos-x__headline">
+        <h2 class="davos-x__title" id="davos-heading" data-davos-reveal>
+          <a href="{{ $davosUrl }}">Davos <em>2027</em></a>
+        </h2>
+        <p class="davos-x__subtitle" data-davos-reveal>Executive Delegation Programme &mdash; one discreet team running your entire week, 18&ndash;22 January 2027.</p>
+
+        <div class="davos-x__countdown" data-davos-countdown="{{ $davosStart }}" data-davos-reveal aria-label="Time until the Annual Meeting starts">
+          <div class="davos-x__unit"><span class="davos-x__num" data-unit="days">000</span><span class="davos-x__label">Days</span></div>
+          <div class="davos-x__unit"><span class="davos-x__num" data-unit="hours">00</span><span class="davos-x__label">Hours</span></div>
+          <div class="davos-x__unit"><span class="davos-x__num" data-unit="minutes">00</span><span class="davos-x__label">Minutes</span></div>
+          <div class="davos-x__unit"><span class="davos-x__num" data-unit="seconds">00</span><span class="davos-x__label">Seconds</span></div>
+          <span class="davos-x__countdown-note">until the Annual Meeting opens</span>
         </div>
       </div>
 
-      <a class="scroll-cue" href="#about-anchor" aria-label="Scroll to next section">
-        <span class="scroll-cue__label">Scroll</span>
-        <span class="scroll-cue__line" aria-hidden="true"><span></span></span>
+      <a class="davos-x__orb" href="{{ $davosUrl }}" data-davos-magnetic data-davos-reveal aria-label="Discover the Davos 2027 programme">
+        <svg class="davos-x__orb-ring" viewBox="0 0 200 200" aria-hidden="true">
+          <defs><path id="davosOrbPath" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+          <text textLength="486" lengthAdjust="spacing"><textPath href="#davosOrbPath" textLength="486" lengthAdjust="spacing">Discover the programme &middot; Davos 2027 &middot;&#160;</textPath></text>
+        </svg>
+        <span class="davos-x__orb-core" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
       </a>
+    </div>
+
+    <ul class="davos-x__items">
+      @foreach ($davosItems as $index => $item)
+        <li class="davos-x__item" data-davos-reveal style="--d: {{ $index }}">
+          <a href="{{ $davosUrl }}">
+            <span class="davos-x__item-num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+            <span class="davos-x__item-title">{{ $item['title'] }}</span>
+            <span class="davos-x__item-text">{{ $item['text'] }}</span>
+          </a>
+        </li>
+      @endforeach
+    </ul>
+
+    <div class="davos-x__foot" data-davos-reveal>
+      <span>Accommodation in Davos is limited &mdash; most delegations book months ahead.</span>
+      <span class="davos-x__disclaimer">SOV SUMMIT is not affiliated with the World Economic Forum. Attendance is by WEF invitation.</span>
     </div>
   </div>
 </section>
@@ -255,6 +285,144 @@
         <h3>Your Outcome</h3>
         <p>One accountable partner across every element of your programme &mdash; a process that stays clear for the client and consistent for every provider involved.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+@php
+    // Replace these with real, approved client testimonials.
+    $testimonials = [
+        ['quote' => '[Client quote about the delegation programme]', 'name' => '[Client name]', 'role' => '[Title, Organisation]', 'sector' => 'Government delegation'],
+        ['quote' => '[Client quote about the summit or conference]', 'name' => '[Client name]', 'role' => '[Title, Organisation]', 'sector' => 'Corporate summit'],
+        ['quote' => '[Client quote about a private event]', 'name' => '[Client name]', 'role' => '[Title, Organisation]', 'sector' => 'Private client'],
+    ];
+@endphp
+<section class="voices" aria-labelledby="voices-heading" data-voices>
+  <div class="container voices__grid">
+    <div class="voices__intro">
+      <p class="voices__eyebrow"><span class="voices__eyebrow-line" aria-hidden="true"></span>Client voices</p>
+      <h2 id="voices-heading">What our clients <em>say</em></h2>
+      <p class="voices__lede">Governments, institutions and private clients trust us with the moments that matter most.</p>
+
+      <div class="voices__controls">
+        <button type="button" class="voices__arrow" data-voices-prev aria-label="Previous testimonial">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span class="voices__count"><span data-voices-current>01</span> / {{ str_pad(count($testimonials), 2, '0', STR_PAD_LEFT) }}</span>
+        <button type="button" class="voices__arrow" data-voices-next aria-label="Next testimonial">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="voices__stage" aria-live="polite">
+      <span class="voices__mark" aria-hidden="true">&ldquo;</span>
+      @foreach ($testimonials as $index => $t)
+        <figure class="voices__slide {{ $index === 0 ? 'is-active' : '' }}" data-voices-slide @if ($index !== 0) aria-hidden="true" @endif>
+          <span class="voices__sector">{{ $t['sector'] }}</span>
+          <blockquote class="voices__quote">{{ $t['quote'] }}</blockquote>
+          <figcaption class="voices__author">
+            <strong>{{ $t['name'] }}</strong>
+            <span>{{ $t['role'] }}</span>
+          </figcaption>
+        </figure>
+      @endforeach
+      <div class="voices__progress" aria-hidden="true"><span data-voices-bar></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="connect" aria-labelledby="connect-heading">
+  <div class="connect__glow" aria-hidden="true"></div>
+  <div class="container connect__grid">
+    <div class="hero-diagram connect__diagram" aria-label="How SOV SUMMIT delivers a successful event">
+      <div class="hero-diagram__orbit hero-diagram__orbit--outer" aria-hidden="true"></div>
+      <div class="hero-diagram__orbit hero-diagram__orbit--mid" aria-hidden="true"></div>
+      <div class="hero-diagram__orbit hero-diagram__orbit--inner" aria-hidden="true"></div>
+      <div class="hero-diagram__ring">
+        <svg class="hero-diagram__lines" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <radialGradient id="heroDiagramGlowInline" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(201,162,75,0.8)"/>
+              <stop offset="100%" stop-color="rgba(201,162,75,0)"/>
+            </radialGradient>
+          </defs>
+          <circle class="hero-diagram__halo" cx="200" cy="200" r="80" fill="url(#heroDiagramGlowInline)"/>
+          <line class="hero-diagram__line" data-line="1" x1="200" y1="200" x2="200" y2="60"/>
+          <line class="hero-diagram__line" data-line="2" x1="200" y1="200" x2="322" y2="130"/>
+          <line class="hero-diagram__line" data-line="3" x1="200" y1="200" x2="322" y2="270"/>
+          <line class="hero-diagram__line" data-line="4" x1="200" y1="200" x2="200" y2="340"/>
+          <line class="hero-diagram__line" data-line="5" x1="200" y1="200" x2="78" y2="270"/>
+          <line class="hero-diagram__line" data-line="6" x1="200" y1="200" x2="78" y2="130"/>
+          <circle class="hero-diagram__particle" data-particle="1" r="3.2" cx="200" cy="200"/>
+          <circle class="hero-diagram__particle" data-particle="2" r="3.2" cx="200" cy="200"/>
+          <circle class="hero-diagram__particle" data-particle="3" r="3.2" cx="200" cy="200"/>
+          <circle class="hero-diagram__particle" data-particle="4" r="3.2" cx="200" cy="200"/>
+          <circle class="hero-diagram__particle" data-particle="5" r="3.2" cx="200" cy="200"/>
+          <circle class="hero-diagram__particle" data-particle="6" r="3.2" cx="200" cy="200"/>
+        </svg>
+
+        <div class="hero-diagram__center">
+          <span class="hero-diagram__pulse" aria-hidden="true"></span>
+          <svg class="hero-diagram__center-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 8l3.5 9h9L20 8l-4.5 3L12 5 8.5 11z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M6.5 19h11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+          </svg>
+          <span class="hero-diagram__center-label">Successful<br>event</span>
+        </div>
+
+        <div class="hero-diagram__node" data-pos="top" data-node="1" style="--i:1">
+          <span class="hero-diagram__node-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 21V6l7-3 7 3v15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 21v-5h6v5M10 9h1M13 9h1M10 12h1M13 12h1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="hero-diagram__node-label">Venue</span>
+        </div>
+
+        <div class="hero-diagram__node" data-pos="tr" data-node="2" style="--i:2">
+          <span class="hero-diagram__node-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3l1.8 8L21 13l-6 3 1 5-4-3-4 3 1-5-6-3 7.2-2z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 17.5l1.5-1.5m4.5 1.5l-1.5-1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="hero-diagram__node-label">Security</span>
+        </div>
+
+        <div class="hero-diagram__node" data-pos="br" data-node="3" style="--i:3">
+          <span class="hero-diagram__node-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 17V9h10l3 3h3v5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="8" cy="18" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="17" cy="18" r="1.8" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4 17h1.5M10 17h5M19 17h1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="hero-diagram__node-label">Transportation</span>
+        </div>
+
+        <div class="hero-diagram__node" data-pos="bottom" data-node="4" style="--i:4">
+          <span class="hero-diagram__node-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 16V8h11v8m0-6h4l3 3v3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="17" cy="18" r="1.6" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M3 16h2.5M8.5 16h6.5M18.5 16H21" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <span class="hero-diagram__node-label">Logistics</span>
+        </div>
+
+        <div class="hero-diagram__node" data-pos="bl" data-node="5" style="--i:5">
+          <span class="hero-diagram__node-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 18v-5a2 2 0 012-2h9v7M3 18h18M21 18v-4h-7" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M6 11V8h4v3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="hero-diagram__node-label">Accommodation</span>
+        </div>
+
+        <div class="hero-diagram__node" data-pos="tl" data-node="6" style="--i:6">
+          <span class="hero-diagram__node-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 15l8-2 3-8 2 1-1 6 6-1 1 2-7 4-2 8-2-1 1-6-8 1z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="hero-diagram__node-label">Private Flight</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="connect__copy">
+      <span class="eyebrow eyebrow--gold">People &middot; Ideas &middot; Impact</span>
+      <h2 id="connect-heading">Connecting the dots. Delivering <em>successful</em> events.</h2>
+      <p class="lede">Venue, security, transportation, logistics, accommodation and private flights &mdash; every element is connected through one coordination team, so your event runs as one.</p>
+      <a class="hero-btn" href="/services">
+        <span>Explore our services</span>
+        <span class="hero-btn__line" aria-hidden="true"></span>
+      </a>
     </div>
   </div>
 </section>

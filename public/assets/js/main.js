@@ -28,6 +28,8 @@ document.addEventListener("DOMContentLoaded", function () {
     initHeader();
     initHero();
     initHeroDiagram();
+    initDavos();
+    initVoices();
     initCookieBanner();
 });
 
@@ -299,3 +301,183 @@ function initHero() {
         });
     }
 }
+
+/**
+ * Davos featured section: scroll reveal, parallax, live countdown, magnetic CTA.
+ */
+function initDavos() {
+    var section = document.querySelector("[data-davos]");
+    if (!section) return;
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Reveal when the section enters the viewport
+    if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    section.classList.add("is-visible");
+                    io.disconnect();
+                }
+            });
+        }, { threshold: 0.18 });
+        io.observe(section);
+    } else {
+        section.classList.add("is-visible");
+    }
+
+    // Parallax background
+    var image = section.querySelector("[data-davos-parallax]");
+    if (image && !reduced) {
+        var ticking = false;
+        var update = function () {
+            var rect = section.getBoundingClientRect();
+            var progress = (rect.top + rect.height / 2 - window.innerHeight / 2) / window.innerHeight;
+            image.style.setProperty("--davos-shift", (progress * -70).toFixed(1) + "px");
+            ticking = false;
+        };
+        window.addEventListener("scroll", function () {
+            if (!ticking) {
+                ticking = true;
+                requestAnimationFrame(update);
+            }
+        }, { passive: true });
+        update();
+    }
+
+    // Live countdown
+    var countdown = section.querySelector("[data-davos-countdown]");
+    if (countdown) {
+        var target = new Date(countdown.getAttribute("data-davos-countdown")).getTime();
+        var units = {};
+        countdown.querySelectorAll("[data-unit]").forEach(function (el) {
+            units[el.getAttribute("data-unit")] = el;
+        });
+        var pad = function (n, len) {
+            n = String(n);
+            while (n.length < len) { n = "0" + n; }
+            return n;
+        };
+        var setUnit = function (name, value) {
+            var el = units[name];
+            if (!el || el.textContent === value) return;
+            el.textContent = value;
+            if (!reduced) {
+                el.classList.remove("is-tick");
+                void el.offsetWidth;
+                el.classList.add("is-tick");
+            }
+        };
+        var timer = null;
+        var tick = function () {
+            var diff = Math.max(0, target - Date.now());
+            setUnit("days", pad(Math.floor(diff / 86400000), 2));
+            setUnit("hours", pad(Math.floor(diff / 3600000) % 24, 2));
+            setUnit("minutes", pad(Math.floor(diff / 60000) % 60, 2));
+            setUnit("seconds", pad(Math.floor(diff / 1000) % 60, 2));
+            if (diff === 0) {
+                clearInterval(timer);
+                countdown.classList.add("is-live");
+                var note = countdown.querySelector(".davos-x__countdown-note");
+                if (note) { note.textContent = "The Annual Meeting is under way"; }
+            }
+        };
+        tick();
+        timer = setInterval(tick, 1000);
+    }
+
+    // Magnetic orb
+    var orb = section.querySelector("[data-davos-magnetic]");
+    var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    if (orb && fine && !reduced) {
+        orb.addEventListener("pointermove", function (e) {
+            var rect = orb.getBoundingClientRect();
+            var x = e.clientX - rect.left - rect.width / 2;
+            var y = e.clientY - rect.top - rect.height / 2;
+            orb.style.transform = "translate(" + (x * 0.25).toFixed(1) + "px, " + (y * 0.25).toFixed(1) + "px)";
+        });
+        orb.addEventListener("pointerleave", function () {
+            orb.style.transform = "";
+        });
+    }
+}
+
+/**
+ * Client voices: auto-rotating testimonial slider with arrows, keyboard, swipe and pause on hover.
+ */
+function initVoices() {
+    var section = document.querySelector("[data-voices]");
+    if (!section) return;
+    var slides = Array.prototype.slice.call(section.querySelectorAll("[data-voices-slide]"));
+    if (slides.length === 0) return;
+    var bar = section.querySelector("[data-voices-bar]");
+    var current = section.querySelector("[data-voices-current]");
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var duration = 7000;
+    var index = 0;
+    var timer = null;
+    var remaining = duration;
+    var startedAt = 0;
+
+    section.style.setProperty("--voices-duration", duration / 1000 + "s");
+
+    function show(next) {
+        index = (next + slides.length) % slides.length;
+        slides.forEach(function (slide, i) {
+            var active = i === index;
+            slide.classList.toggle("is-active", active);
+            slide.setAttribute("aria-hidden", active ? "false" : "true");
+        });
+        if (current) { current.textContent = (index < 9 ? "0" : "") + (index + 1); }
+        restart();
+    }
+
+    function restart() {
+        clearTimeout(timer);
+        remaining = duration;
+        if (bar) {
+            bar.classList.remove("is-running");
+            void bar.offsetWidth;
+        }
+        if (reduced || slides.length < 2) return;
+        if (bar) { bar.classList.add("is-running"); }
+        run();
+    }
+
+    function run() {
+        startedAt = Date.now();
+        timer = setTimeout(function () { show(index + 1); }, remaining);
+    }
+
+    section.querySelector("[data-voices-prev]").addEventListener("click", function () { show(index - 1); });
+    section.querySelector("[data-voices-next]").addEventListener("click", function () { show(index + 1); });
+
+    section.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowLeft") { show(index - 1); }
+        if (e.key === "ArrowRight") { show(index + 1); }
+    });
+
+    section.addEventListener("mouseenter", function () {
+        if (reduced) return;
+        clearTimeout(timer);
+        remaining -= Date.now() - startedAt;
+        section.setAttribute("data-paused", "");
+    });
+    section.addEventListener("mouseleave", function () {
+        if (reduced) return;
+        section.removeAttribute("data-paused");
+        run();
+    });
+
+    var touchX = null;
+    var stage = section.querySelector(".voices__stage");
+    stage.addEventListener("touchstart", function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+    stage.addEventListener("touchend", function (e) {
+        if (touchX === null) return;
+        var dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 40) { show(index + (dx < 0 ? 1 : -1)); }
+        touchX = null;
+    });
+
+    show(0);
+}
+
