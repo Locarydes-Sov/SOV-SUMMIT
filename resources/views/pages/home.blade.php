@@ -5,6 +5,8 @@
 @section('canonical', 'https://sov-summit.com/')
 
 @push('head')
+<link rel="preload" as="image" href="{{ asset('assets/img/hero/hero-reception-sm.webp') }}" media="(max-width: 720px)" fetchpriority="high">
+<link rel="preload" as="image" href="{{ asset('assets/img/hero/hero-reception.webp') }}" media="(min-width: 721px)" fetchpriority="high">
 <script type="application/ld+json">{!! '{"@context": "https://schema.org", "@type": "Organization", "name": "SOV SUMMIT", "legalName": "Sovereign Summit GmbH", "url": "https://sov-summit.com/", "logo": "https://sov-summit.com/assets/img/logo.webp", "email": "info@sov-summit.com", "address": {"@type": "PostalAddress", "streetAddress": "Bahnhofstrasse 21", "addressLocality": "Zug", "postalCode": "6300", "addressCountry": "CH"}, "slogan": "People. Ideas. Impact."}' !!}</script>
 <script type="application/ld+json">{!! '{"@context": "https://schema.org", "@type": "WebSite", "name": "SOV SUMMIT", "url": "https://sov-summit.com/"}' !!}</script>
 @php
@@ -45,8 +47,22 @@
 
 @section('content')
 
+@php
+    // Hero background photos. They cross-fade slowly every 10 seconds; add more here if you like.
+    $heroSlides = [
+        ['image' => 'assets/img/hero/hero-reception.webp', 'small' => 'assets/img/hero/hero-reception-sm.webp'],
+        ['image' => 'assets/img/hero/hero-summit-hall.webp', 'small' => 'assets/img/hero/hero-summit-hall-sm.webp'],
+    ];
+@endphp
 <section class="hero hero--split" id="hero">
-  <div class="hero-bg" aria-hidden="true">
+  <div class="hero-bg" aria-hidden="true" data-hero-slides>
+    @foreach ($heroSlides as $index => $slide)
+      @if ($index === 0)
+        <div class="hero-slide is-active" style="--slide-image: url('{{ asset($slide['image']) }}'); --slide-image-sm: url('{{ asset($slide['small']) }}');"></div>
+      @else
+        <div class="hero-slide" data-image="{{ asset($slide['image']) }}" data-image-sm="{{ asset($slide['small']) }}"></div>
+      @endif
+    @endforeach
     <div class="hero-grain"></div>
   </div>
 

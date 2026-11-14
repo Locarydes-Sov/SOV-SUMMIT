@@ -5376,3 +5376,29 @@ section.tight { padding: clamp(2.2rem, 4vw, 3.5rem) 0; }
     text-transform: uppercase;
     color: var(--gold);
 }
+
+/* ---------- Hero background slideshow (slow cross-fade) ---------- */
+.hero--split .hero-bg::before { content: none; }
+.hero-slide {
+    position: absolute;
+    inset: -6%;
+    left: calc(30% - 6%);
+    background-image: var(--slide-image);
+    background-size: cover;
+    background-position: 62% center;
+    opacity: 0;
+    transform: scale(1.05);
+    transition: opacity 3.5s ease-in-out;
+    animation: heroKenBurns 28s ease-in-out infinite alternate;
+    will-change: opacity, transform;
+}
+.hero-slide.is-active { opacity: 1; }
+@media (max-width: 1100px) {
+    .hero-slide { left: -6%; }
+}
+@media (max-width: 720px) {
+    .hero-slide { background-image: var(--slide-image-sm, var(--slide-image)); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .hero-slide { transition: none; animation: none; }
+}

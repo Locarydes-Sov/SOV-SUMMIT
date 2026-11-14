@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     initHeader();
     initHero();
+    initHeroSlides();
     initHeroDiagram();
     initDavos();
     initVoices();
@@ -479,5 +480,59 @@ function initVoices() {
     });
 
     show(0);
+}
+
+/**
+ * Hero background: cross-fade slowly to the next photo every 10 seconds.
+ * The next photo is fully loaded before the fade starts, so there is no flash.
+ */
+function initHeroSlides() {
+    var container = document.querySelector("[data-hero-slides]");
+    if (!container) return;
+    var slides = Array.prototype.slice.call(container.querySelectorAll(".hero-slide"));
+    if (slides.length < 2) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    var interval = 10000;
+    var small = window.matchMedia("(max-width: 720px)").matches;
+    var index = 0;
+
+    function load(slide, done) {
+        var large = slide.getAttribute("data-image");
+        if (!large) { done(); return; }
+        var compact = slide.getAttribute("data-image-sm") || large;
+        var img = new Image();
+        img.onload = img.onerror = function () {
+            if (slide.hasAttribute("data-image")) {
+                slide.style.setProperty("--slide-image", "url('" + large + "')");
+                slide.style.setProperty("--slide-image-sm", "url('" + compact + "')");
+                slide.removeAttribute("data-image");
+                slide.removeAttribute("data-image-sm");
+            }
+            done();
+        };
+        img.src = small ? compact : large;
+    }
+
+    function next() {
+        if (document.hidden) {
+            setTimeout(next, interval);
+            return;
+        }
+        var nextIndex = (index + 1) % slides.length;
+        load(slides[nextIndex], function () {
+            slides[index].classList.remove("is-active");
+            slides[nextIndex].classList.add("is-active");
+            index = nextIndex;
+            setTimeout(next, interval);
+        });
+    }
+
+    // Start loading the second photo once the page has finished loading.
+    window.addEventListener("load", function () {
+        load(slides[1], function () {});
+    });
+
+    setTimeout(next, interval);
 }
 
