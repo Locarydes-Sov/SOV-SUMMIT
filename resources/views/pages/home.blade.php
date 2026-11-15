@@ -94,8 +94,6 @@
         ['value' => '30+',  'label' => 'Countries'],
         ['value' => '20+',  'label' => 'Heads of state hosted'],
     ];
-    // Replace each null with a logo path, e.g. 'assets/img/clients/acme.svg'
-    $clientLogos = [null, null, null, null, null];
 @endphp
 <section class="trust-strip" aria-label="SOV SUMMIT in numbers">
   <ul class="trust-strip__stats">
@@ -106,56 +104,25 @@
       </li>
     @endforeach
   </ul>
-  <div class="trust-strip__clients">
-    <p class="trust-strip__heading">Trusted by governments, institutions and global organisations</p>
-    <ul class="trust-strip__logos">
-      @foreach ($clientLogos as $logo)
-        <li class="trust-strip__logo">
-          @if ($logo)
-            <img src="{{ asset($logo) }}" alt="" loading="lazy" />
-          @else
-            <span>Client logo</span>
-          @endif
-        </li>
-      @endforeach
-    </ul>
-  </div>
 </section>
 
 @php
     $founder = [
-        'name'  => 'MD Waliullah',
+        'name'  => 'Wali Akond',
         'title' => 'Founder & Managing Director, SOV Summit',
-        // Put the photo in public/assets/img/team/ and set the path here, e.g. 'assets/img/team/founder.webp'
-        'photo' => 'assets/img/team/founder.webp',
     ];
 @endphp
 <section class="welcome" aria-labelledby="welcome-heading">
-  <div class="container welcome__grid">
-    <figure class="welcome__photo">
-      <div class="welcome__frame">
-        @if ($founder['photo'])
-          <img src="{{ asset($founder['photo']) }}" alt="{{ $founder['name'] }}, {{ $founder['title'] }}" loading="lazy" width="640" height="800" />
-        @else
-          <span class="welcome__placeholder">Photo of founder</span>
-        @endif
-      </div>
-    </figure>
-
-    <div class="welcome__copy">
-      <p class="welcome__eyebrow"><span class="welcome__eyebrow-line" aria-hidden="true"></span>A personal welcome</p>
-      <blockquote class="welcome__quote" id="welcome-heading">
-        &ldquo;Every event we host carries someone&rsquo;s reputation. <em>We treat yours as if it were our own.</em>&rdquo;
-      </blockquote>
-      <p class="welcome__text">Thank you for considering SOV Summit. Whether you are planning an intimate leadership retreat or a summit for heads of state, you will work with people who listen first, plan carefully and stay by your side until the last guest has left. We would be delighted to hear about your event.</p>
-      <div class="welcome__sign">
-        <span class="welcome__signature" aria-hidden="true">{{ $founder['name'] }}</span>
-        <span class="welcome__person">
-          <strong>{{ $founder['name'] }}</strong>
-          <span>{{ $founder['title'] }}</span>
-        </span>
-      </div>
-    </div>
+  <div class="container welcome__inner">
+    <p class="welcome__eyebrow">A personal welcome</p>
+    <blockquote class="welcome__quote" id="welcome-heading">
+      &ldquo;Every event we host carries someone&rsquo;s reputation. <em>We treat yours as if it were our own.</em>&rdquo;
+    </blockquote>
+    <p class="welcome__text">Whether you are planning an intimate leadership retreat or a summit for heads of state, you will work with people who listen first, plan carefully and stay by your side until the last guest has left.</p>
+    <p class="welcome__sign">
+      <span class="welcome__signature">{{ $founder['name'] }}</span>
+      <span class="welcome__role">{{ $founder['title'] }}</span>
+    </p>
   </div>
 </section>
 
@@ -172,7 +139,9 @@
         ['title' => 'Security & support', 'text' => 'Security liaison, secure routing and one point of contact.'],
     ];
 @endphp
-<section class="davos-x" aria-labelledby="davos-heading" data-davos>
+<section class="davos-wrap" aria-labelledby="davos-heading">
+  <div class="container">
+<div class="davos-x" data-davos>
   <div class="davos-x__media" aria-hidden="true">
     <img class="davos-x__image" src="{{ $davosImage }}" alt="" loading="lazy" width="1920" height="1080" data-davos-parallax />
   </div>
@@ -181,7 +150,7 @@
   <div class="davos-x__inner">
     <div class="davos-x__top" data-davos-reveal>
       <span class="davos-x__eyebrow"><span class="davos-x__eyebrow-line" aria-hidden="true"></span>Featured programme</span>
-      <span class="davos-x__place">WEF Annual Meeting &middot; Davos-Klosters, Switzerland</span>
+      <span class="davos-x__place">WEF Annual Meeting &middot; 18&ndash;22 January 2027 &middot; Davos, Switzerland</span>
     </div>
 
     <div class="davos-x__main">
@@ -189,15 +158,20 @@
         <h2 class="davos-x__title" id="davos-heading" data-davos-reveal>
           <a href="{{ $davosUrl }}">Davos <em>2027</em></a>
         </h2>
-        <p class="davos-x__subtitle" data-davos-reveal>Executive Delegation Programme &mdash; one discreet team running your entire week, 18&ndash;22 January 2027.</p>
+        <p class="davos-x__subtitle" data-davos-reveal>Executive Delegation Programme &mdash; one discreet team for your entire week.</p>
+        <p class="davos-x__tags" data-davos-reveal>
+          @foreach ($davosItems as $item)
+            <a href="{{ $davosUrl }}">{{ $item['title'] }}</a>
+          @endforeach
+        </p>
+      </div>
 
-        <div class="davos-x__countdown" data-davos-countdown="{{ $davosStart }}" data-davos-reveal aria-label="Time until the Annual Meeting starts">
-          <div class="davos-x__unit"><span class="davos-x__num" data-unit="days">000</span><span class="davos-x__label">Days</span></div>
-          <div class="davos-x__unit"><span class="davos-x__num" data-unit="hours">00</span><span class="davos-x__label">Hours</span></div>
-          <div class="davos-x__unit"><span class="davos-x__num" data-unit="minutes">00</span><span class="davos-x__label">Minutes</span></div>
-          <div class="davos-x__unit"><span class="davos-x__num" data-unit="seconds">00</span><span class="davos-x__label">Seconds</span></div>
-          <span class="davos-x__countdown-note">until the Annual Meeting opens</span>
-        </div>
+      <div class="davos-x__countdown" data-davos-countdown="{{ $davosStart }}" data-davos-reveal aria-label="Time until the Annual Meeting starts">
+        <div class="davos-x__unit"><span class="davos-x__num" data-unit="days">000</span><span class="davos-x__label">Days</span></div>
+        <div class="davos-x__unit"><span class="davos-x__num" data-unit="hours">00</span><span class="davos-x__label">Hours</span></div>
+        <div class="davos-x__unit"><span class="davos-x__num" data-unit="minutes">00</span><span class="davos-x__label">Min</span></div>
+        <div class="davos-x__unit"><span class="davos-x__num" data-unit="seconds">00</span><span class="davos-x__label">Sec</span></div>
+        <span class="davos-x__countdown-note">until the Annual Meeting opens</span>
       </div>
 
       <a class="davos-x__orb" href="{{ $davosUrl }}" data-davos-magnetic data-davos-reveal aria-label="Discover the Davos 2027 programme">
@@ -211,22 +185,9 @@
       </a>
     </div>
 
-    <ul class="davos-x__items">
-      @foreach ($davosItems as $index => $item)
-        <li class="davos-x__item" data-davos-reveal style="--d: {{ $index }}">
-          <a href="{{ $davosUrl }}">
-            <span class="davos-x__item-num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
-            <span class="davos-x__item-title">{{ $item['title'] }}</span>
-            <span class="davos-x__item-text">{{ $item['text'] }}</span>
-          </a>
-        </li>
-      @endforeach
-    </ul>
-
-    <div class="davos-x__foot" data-davos-reveal>
-      <span>Accommodation in Davos is limited &mdash; most delegations book months ahead.</span>
-      <span class="davos-x__disclaimer">SOV SUMMIT is not affiliated with the World Economic Forum. Attendance is by WEF invitation.</span>
-    </div>
+    <p class="davos-x__disclaimer" data-davos-reveal>SOV SUMMIT is not affiliated with the World Economic Forum. Attendance is by WEF invitation.</p>
+  </div>
+</div>
   </div>
 </section>
 
@@ -305,18 +266,18 @@
 </section>
 
 @php
-    // Real, approved client testimonials go here. While this list is empty the section is hidden on the live site.
+    // Real, approved client testimonials go here (name + job title, no company). While this list is empty the section is hidden on the live site.
     $testimonials = [];
 
     // Sample text for checking the design on a local machine only. Never shown when APP_ENV is not "local".
     $isSampleTestimonials = $testimonials === [] && app()->isLocal();
     if ($isSampleTestimonials) {
         $testimonials = [
-            ['sector' => 'Corporate Summit', 'quote' => 'Working with SOV Summit was an excellent experience. Their professionalism, attention to detail, and ability to manage every aspect of the event made the entire process seamless. We look forward to working together again.', 'name' => 'James Richardson', 'role' => 'Managing Director, Global Business Group'],
-            ['sector' => 'International Conference', 'quote' => 'SOV Summit demonstrated exceptional expertise in coordinating our international conference. From the initial planning to the final execution, everything was handled with precision and professionalism.', 'name' => 'Sarah Mitchell', 'role' => 'Conference Director, International Events Council'],
-            ['sector' => 'Executive Training', 'quote' => 'The training programme was thoughtfully designed and professionally delivered. The team created an engaging environment that encouraged meaningful discussions, knowledge sharing, and valuable connections.', 'name' => 'Alexander Bennett', 'role' => 'Head of Learning & Development, Apex Consulting'],
-            ['sector' => 'Government & Institutional Events', 'quote' => 'Delivering an event of this scale requires strong coordination, strategic thinking, and attention to every detail. SOV Summit exceeded our expectations and ensured a smooth and successful experience.', 'name' => 'Olivia Thompson', 'role' => 'Senior Programme Manager, Global Policy Institute'],
-            ['sector' => 'Strategic Partnership', 'quote' => 'What truly sets SOV Summit apart is their commitment to quality and collaborative approach. They understood our vision and transformed it into an experience that was both impactful and memorable.', 'name' => 'Daniel Foster', 'role' => 'Chief Executive Officer, Horizon International Group'],
+            ['sector' => 'Corporate Summit', 'quote' => 'Working with SOV Summit was an excellent experience. Their professionalism, attention to detail, and ability to manage every aspect of the event made the entire process seamless. We look forward to working together again.', 'name' => 'James Richardson', 'role' => 'Managing Director'],
+            ['sector' => 'International Conference', 'quote' => 'SOV Summit demonstrated exceptional expertise in coordinating our international conference. From the initial planning to the final execution, everything was handled with precision and professionalism.', 'name' => 'Sarah Mitchell', 'role' => 'Conference Director'],
+            ['sector' => 'Executive Training', 'quote' => 'The training programme was thoughtfully designed and professionally delivered. The team created an engaging environment that encouraged meaningful discussions, knowledge sharing, and valuable connections.', 'name' => 'Alexander Bennett', 'role' => 'Head of Learning & Development'],
+            ['sector' => 'Government & Institutional Events', 'quote' => 'Delivering an event of this scale requires strong coordination, strategic thinking, and attention to every detail. SOV Summit exceeded our expectations and ensured a smooth and successful experience.', 'name' => 'Olivia Thompson', 'role' => 'Senior Programme Manager'],
+            ['sector' => 'Strategic Partnership', 'quote' => 'What truly sets SOV Summit apart is their commitment to quality and collaborative approach. They understood our vision and transformed it into an experience that was both impactful and memorable.', 'name' => 'Daniel Foster', 'role' => 'Chief Executive Officer'],
         ];
     }
 @endphp
