@@ -48,10 +48,9 @@
 @section('content')
 
 @php
-    // Hero background photos. They cross-fade slowly every 10 seconds; add more here if you like.
+    // Hero background photo. Add more entries to cross-fade slowly between them every 10 seconds.
     $heroSlides = [
         ['image' => 'assets/img/hero/hero-reception.webp', 'small' => 'assets/img/hero/hero-reception-sm.webp'],
-        ['image' => 'assets/img/hero/hero-summit-hall.webp', 'small' => 'assets/img/hero/hero-summit-hall-sm.webp'],
     ];
 @endphp
 <section class="hero hero--split" id="hero">
