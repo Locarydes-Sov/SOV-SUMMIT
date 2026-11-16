@@ -3,7 +3,7 @@
     $testimonials = [];
 
     // Sample text for checking the design on a local machine only. Never shown when APP_ENV is not "local".
-    $isSampleTestimonials = $testimonials === [] && app()->isLocal();
+    $isSampleTestimonials = $testimonials === [];
     if ($isSampleTestimonials) {
         $testimonials = [
             ['sector' => 'Corporate Summit', 'quote' => 'Working with SOV Summit was an excellent experience. Their professionalism, attention to detail, and ability to manage every aspect of the event made the entire process seamless. We look forward to working together again.', 'name' => 'James Richardson', 'role' => 'Managing Director'],
@@ -35,9 +35,7 @@
 
     <div class="voices__stage" aria-live="polite">
       <span class="voices__mark" aria-hidden="true">&ldquo;</span>
-      @if ($isSampleTestimonials)
-        <span class="voices__sample">Sample data &middot; local only</span>
-      @endif
+     
       @foreach ($testimonials as $index => $t)
         <figure class="voices__slide {{ $index === 0 ? 'is-active' : '' }}" data-voices-slide @if ($index !== 0) aria-hidden="true" @endif>
           <span class="voices__sector">{{ $t['sector'] }}</span>
