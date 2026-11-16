@@ -19,7 +19,7 @@
         ['label' => 'Training',                 'href' => '/management-training'],
     ];
     $tailItems = [
-        ['label' => 'Solution', 'href' => '/products',                     'match' => 'products*'],
+        ['label' => 'Solutions', 'href' => '/products',                    'match' => 'products*'],
         ['label' => 'Training', 'href' => '/management-training',          'match' => 'management-training*'],
         ['label' => 'Events',   'href' => '/events',                       'match' => 'events*'],
         ['label' => 'Offers',   'href' => '/special-offers',               'match' => 'special-offers*'],

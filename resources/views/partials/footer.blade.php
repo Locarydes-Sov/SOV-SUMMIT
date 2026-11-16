@@ -11,7 +11,7 @@
         <ul>
           <li><a href="/about">About</a></li>
           <li><a href="/services">Services</a></li>
-          <li><a href="/products">Products</a></li>
+          <li><a href="/products">Solutions</a></li>
           <li><a href="/management-training">Management Training</a></li>
           <li><a href="/events">Events</a></li>
           <li><a href="/services/travel-experiences">Travel & Experiences</a></li>
