@@ -58,6 +58,7 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::view('/insights', 'pages.insights');
 Route::view('/contact', 'pages.contact')->name('contact');
+Route::view('/faq', 'pages.faq')->name('faq');
 Route::view('/legal-notice', 'pages.legal.notice');
 Route::view('/privacy-policy', 'pages.legal.privacy');
 Route::view('/cookie-policy', 'pages.legal.cookie');

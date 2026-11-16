@@ -16,6 +16,7 @@
           <li><a href="/events">Events</a></li>
           <li><a href="/services/travel-experiences">Travel & Experiences</a></li>
           <li><a href="/insights">Insights</a></li>
+          <li><a href="/faq">FAQ</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
       </div>

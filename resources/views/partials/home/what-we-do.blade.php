@@ -1,4 +1,4 @@
-<section class="connect" aria-labelledby="connect-heading">
+<section class="connect what-we-do" aria-labelledby="what-we-do-heading">
   <div class="connect__glow" aria-hidden="true"></div>
   <div class="container connect__grid">
     <div class="hero-diagram connect__diagram" aria-label="How SOV SUMMIT delivers a successful event">
@@ -82,9 +82,34 @@
     </div>
 
     <div class="connect__copy">
-      <span class="eyebrow eyebrow--gold">People &middot; Ideas &middot; Impact</span>
-      <h2 id="connect-heading">Connecting the dots. Delivering <em>successful</em> events.</h2>
-      <p class="lede">Venue, security, transportation, logistics, accommodation and private flights &mdash; every element is connected through one coordination team, so your event runs as one.</p>
+      <span class="eyebrow eyebrow--gold">What we do</span>
+      <h2 id="what-we-do-heading">One partner. The right connections. <em>A successful result.</em></h2>
+      <p class="lede">Complex events and international programmes need reliable providers, clear communication and someone who sees how every part fits together. SOV SUMMIT is that one accountable partner &mdash; bringing structure, discretion and reliability to every stage.</p>
+
+      <ol class="wwd-steps" role="list">
+        <li>
+          <span class="wwd-steps__num">01</span>
+          <div>
+            <h3>Planning</h3>
+            <p>We build the operational structure behind your programme and identify the right providers.</p>
+          </div>
+        </li>
+        <li>
+          <span class="wwd-steps__num">02</span>
+          <div>
+            <h3>Connecting</h3>
+            <p>Venues, transport, accommodation, aviation, production, security, hospitality and media &mdash; brought together as one.</p>
+          </div>
+        </li>
+        <li>
+          <span class="wwd-steps__num">03</span>
+          <div>
+            <h3>Delivering</h3>
+            <p>We coordinate every moving part before and during the programme, so the result is organised and reliable.</p>
+          </div>
+        </li>
+      </ol>
+
       <a class="hero-btn" href="/services">
         <span>Explore our services</span>
         <span class="hero-btn__line" aria-hidden="true"></span>

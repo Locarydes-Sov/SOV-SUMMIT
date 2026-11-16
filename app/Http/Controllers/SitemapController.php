@@ -28,6 +28,7 @@ class SitemapController extends Controller
         '/blog' => '0.7',
         '/insights' => '0.6',
         '/contact' => '0.8',
+        '/faq' => '0.6',
         '/legal-notice' => '0.2',
         '/privacy-policy' => '0.2',
         '/cookie-policy' => '0.2',

@@ -1,9 +1,9 @@
-<section class="why-sov" aria-labelledby="why-sov-heading">
+<section class="why-sov why-us" aria-labelledby="why-us-heading">
   <div class="why-sov__glow" aria-hidden="true"></div>
   <div class="container">
     <header class="why-sov__head">
-      <span class="eyebrow eyebrow--gold">Why Sov Summit?</span>
-      <h2 id="why-sov-heading">From fragmented vendors to one organised event operation.</h2>
+      <span class="eyebrow eyebrow--gold">Why us</span>
+      <h2 id="why-us-heading">From fragmented vendors to one organised event operation.</h2>
       <p class="lede">The event-services market is highly fragmented &mdash; multiple vendors, inconsistent service standards, limited transparency, and unnecessary markups. Rarely is there a single operational tool connecting, organising, and supervising every provider throughout an event.</p>
     </header>
 
@@ -62,14 +62,27 @@
       </article>
     </div>
 
-    <div class="why-sov__signature">
-      <span class="why-sov__sig-rule" aria-hidden="true"></span>
-      <p class="why-sov__sig-line">
-        <span>Sov Summit</span>
-        <span class="why-sov__sig-dash">&mdash;</span>
-        <span class="why-sov__sig-tag">People. Ideas. Impact.</span>
-      </p>
-      <span class="why-sov__sig-rule" aria-hidden="true"></span>
-    </div>
+    <ul class="why-us__principles" role="list">
+      <li>
+        <span class="why-us__num">01</span>
+        <h3>One point of coordination</h3>
+        <p>One team and one accountable line of communication for every requirement.</p>
+      </li>
+      <li>
+        <span class="why-us__num">02</span>
+        <h3>International provider network</h3>
+        <p>Local and international partners, matched to the exact needs of each programme.</p>
+      </li>
+      <li>
+        <span class="why-us__num">03</span>
+        <h3>Discretion &amp; professionalism</h3>
+        <p>Confidentiality and careful handling of sensitive arrangements are our baseline.</p>
+      </li>
+      <li>
+        <span class="why-us__num">04</span>
+        <h3>Flexible execution</h3>
+        <p>Every programme is built around your objectives, schedule and people &mdash; not a template.</p>
+      </li>
+    </ul>
   </div>
 </section>

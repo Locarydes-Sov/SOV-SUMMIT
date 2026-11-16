@@ -5311,3 +5311,176 @@ section.tight { padding: clamp(2.2rem, 4vw, 3.5rem) 0; }
 @media (prefers-reduced-motion: reduce) {
     .hero-slide { transition: none; animation: none; }
 }
+
+/* ---------- What we do (merged Method + Approach + Connecting the dots) ---------- */
+.what-we-do .connect__copy .lede { margin-bottom: 1.6rem; }
+.wwd-steps {
+    display: grid;
+    gap: 1.1rem;
+    margin: 0 0 2.2rem;
+    padding: 0;
+    list-style: none;
+}
+.wwd-steps li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 1rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid rgba(251, 249, 245, 0.14);
+}
+.wwd-steps__num {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    color: var(--gold-bright);
+    padding-top: 0.35rem;
+}
+.wwd-steps h3 {
+    margin: 0 0 0.25rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.45rem;
+    color: var(--paper);
+}
+.wwd-steps p {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(251, 249, 245, 0.7);
+}
+
+/* ---------- How we work (merged Process + How we help) ---------- */
+.hww-promises {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1px;
+    margin: clamp(2.5rem, 5vw, 3.5rem) 0 0;
+    padding: 0;
+    list-style: none;
+    background: rgba(169, 129, 46, 0.22);
+    border: 1px solid rgba(169, 129, 46, 0.22);
+}
+.hww-promises li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.4rem 1.3rem;
+    background: var(--paper);
+}
+.hww-promises strong {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--ink);
+}
+.hww-promises span {
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+}
+@media (max-width: 900px) {
+    .hww-promises { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+    .hww-promises { grid-template-columns: 1fr; }
+}
+
+/* ---------- Why us (merged both "Why SOV Summit" sections) ---------- */
+.why-us__principles {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+    margin: clamp(2.5rem, 5vw, 3.75rem) 0 0;
+    padding: clamp(2rem, 4vw, 2.75rem) 0 0;
+    list-style: none;
+    border-top: 1px solid rgba(201, 162, 75, 0.25);
+}
+.why-us__num {
+    display: block;
+    margin-bottom: 0.7rem;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    color: var(--gold-bright);
+}
+.why-us__principles h3 {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    color: var(--paper);
+}
+.why-us__principles p {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    font-size: 0.92rem;
+    line-height: 1.65;
+    color: rgba(251, 249, 245, 0.68);
+}
+@media (max-width: 900px) {
+    .why-us__principles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+    .why-us__principles { grid-template-columns: 1fr; }
+}
+
+/* ---------- FAQ: "see all" link + /faq page ---------- */
+.faq-more { margin: 2rem 0 0; text-align: center; }
+.faq-more a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--gold);
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    transition: color 0.2s ease;
+}
+.faq-more a:hover { color: var(--gold); }
+.faq-page__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+.faq-page__nav a {
+    padding: 0.4rem 0.9rem;
+    border: 1px solid rgba(169, 129, 46, 0.35);
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--ink);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.faq-page__nav a:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
+.faq-page__group { margin-top: clamp(2.5rem, 5vw, 3.5rem); scroll-margin-top: calc(var(--header-h) + 1.5rem); }
+.faq-page__heading {
+    margin: 0 0 1rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+}
+.faq-page__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 1.5rem;
+    margin-top: clamp(3rem, 6vw, 4.5rem);
+    padding-top: 2rem;
+    border-top: 1px solid rgba(169, 129, 46, 0.25);
+}
+.faq-page__cta p { margin: 0; font-family: var(--font-serif); font-size: 1.5rem; }
