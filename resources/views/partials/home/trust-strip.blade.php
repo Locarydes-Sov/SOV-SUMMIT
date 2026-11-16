@@ -2,7 +2,7 @@
     $heroStats = [
         ['value' => '550+', 'label' => 'Events delivered'],
         ['value' => '30+',  'label' => 'Countries'],
-        ['value' => '20+',  'label' => 'Heads of state hosted'],
+        ['value' => '20+',  'label' => 'Heads of state supported'],
     ];
 @endphp
 <section class="trust-strip" aria-label="SOV SUMMIT in numbers">

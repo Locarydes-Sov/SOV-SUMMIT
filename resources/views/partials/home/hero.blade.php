@@ -28,11 +28,14 @@
           <span>Begin your enquiry</span>
           <span class="hero-btn__line" aria-hidden="true"></span>
         </a>
-        <a class="hero-link" href="/services">Discover our services</a>
+        <a class="hero-btn" href="/services">
+          <span>Discover our services</span>
+          <span class="hero-btn__line" aria-hidden="true"></span>
+        </a>
       </div>
       <ul class="hero-assurances reveal" data-reveal="up" data-reveal-delay="440">
         <li>Complimentary first consultation</li>
-        <li>Reply within one business day</li>
+        <li>Reply in 12 hours</li>
         <li>Strictly confidential</li>
       </ul>
     </div>

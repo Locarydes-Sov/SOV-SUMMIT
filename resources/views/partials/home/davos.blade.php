@@ -1,7 +1,7 @@
 @php
     $davosSlug  = 'davos-2027-wef-annual-meeting-executive-delegation-programme';
     $davosEvent = \App\Models\Event::query()->published()->where('slug', $davosSlug)->first();
-    $davosImage = $davosEvent?->cover_url ?: 'https://images.unsplash.com/photo-1587952134350-d10487bc1c37?auto=format&fit=crop&w=1920&q=80';
+    $davosImage = asset('assets/img/sections/davos-arrival-v2.webp');
     $davosUrl   = route('events.show', $davosSlug);
     $davosContactUrl = route('contact', ['programme' => 'Davos 2027', 'destination' => 'Davos, Switzerland', 'service' => 'Delegation Management']);
     $davosStart = '2027-01-18T09:00:00+01:00';
@@ -16,7 +16,7 @@
   <div class="container">
 <div class="davos-x" data-davos>
   <div class="davos-x__media">
-    <img class="davos-x__image" src="{{ $davosImage }}" alt="Davos in winter, the alpine town that hosts the WEF Annual Meeting" loading="lazy" width="1920" height="1080" data-davos-parallax />
+    <img class="davos-x__image" src="{{ $davosImage }}" alt="Chauffeured arrival with security at the Annual Meeting venue in Davos, in winter" loading="lazy" width="1672" height="941" data-davos-parallax />
   </div>
   <div class="davos-x__shade" aria-hidden="true"></div>
 
