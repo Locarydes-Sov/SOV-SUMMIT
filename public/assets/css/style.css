@@ -4905,25 +4905,30 @@ section.tight { padding: clamp(2.2rem, 4vw, 3.5rem) 0; }
 /* Main */
 .davos-x__main {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+        "head count"
+        "head orb";
     align-items: center;
-    gap: clamp(1.25rem, 3vw, 2.75rem);
+    gap: 1.5rem clamp(1.5rem, 4vw, 4rem);
 }
-.davos-x__headline { min-width: 0; }
+.davos-x__headline { grid-area: head; min-width: 0; max-width: 640px; }
+.davos-x__countdown { grid-area: count; justify-self: end; }
+.davos-x__orb { grid-area: orb; justify-self: end; }
 .davos-x__title {
     margin: 0;
     font-family: var(--font-serif);
     font-weight: 400;
-    font-size: clamp(2.6rem, 4.4vw, 4.2rem);
-    line-height: 0.95;
+    max-width: 22ch;
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+    line-height: 1.12;
+    color: var(--paper);
     letter-spacing: -0.02em;
 }
-.davos-x__title a { color: var(--paper); transition: color 0.4s ease; }
-.davos-x__title em { font-style: italic; color: #d8c08e; }
-.davos-x__title a:hover { color: #fff; }
+.davos-x__title em { display: block; font-style: italic; color: #d8c08e; }
 .davos-x__subtitle {
-    max-width: 46ch;
-    margin: 0.6rem 0 0;
+    max-width: 60ch;
+    margin: 0.8rem 0 0;
     font-family: var(--font-sans);
     font-weight: 300;
     font-size: 0.95rem;
@@ -4933,9 +4938,9 @@ section.tight { padding: clamp(2.2rem, 4vw, 3.5rem) 0; }
 
 /* Countdown */
 .davos-x__countdown {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    align-items: end;
     gap: 0.4rem clamp(1rem, 2vw, 1.75rem);
     margin-top: 0;
 }
@@ -4956,7 +4961,7 @@ section.tight { padding: clamp(2.2rem, 4vw, 3.5rem) 0; }
     color: var(--gold-bright);
 }
 .davos-x__countdown-note {
-    flex-basis: 100%;
+    grid-column: 1 / -1;
     margin: 0.2rem 0 0;
     font-family: var(--font-sans);
     font-size: 0.82rem;
@@ -5012,29 +5017,63 @@ section.tight { padding: clamp(2.2rem, 4vw, 3.5rem) 0; }
 .davos-x__orb:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 6px; }
 @keyframes davosSpin { to { transform: rotate(360deg); } }
 
-/* Service tags (compact replacement for the cards) */
+/* "Included:" service chips (no separators, so nothing is left at the start of a wrapped line) */
 .davos-x__tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem;
     max-width: none;
-    margin: 0.9rem 0 0;
-    line-height: 1.9;
+    margin: 1rem 0 0;
 }
-.davos-x__tags a {
+.davos-x__tags-label {
+    margin-right: 0.3rem;
     font-family: var(--font-sans);
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.16em;
-    display: inline-block;
-    white-space: nowrap;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(251, 249, 245, 0.75);
-    transition: color 0.3s ease;
-}
-.davos-x__tags a + a::before {
-    content: "\00b7";
-    margin: 0 0.55rem 0 0.4rem;
     color: var(--gold-bright);
 }
-.davos-x__tags a:hover { color: var(--gold-bright); }
+.davos-x__tag {
+    padding: 0.32rem 0.7rem;
+    border: 1px solid rgba(251, 249, 245, 0.22);
+    border-radius: 999px;
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    color: rgba(251, 249, 245, 0.85);
+}
+
+/* Buttons */
+.davos-x__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    margin-top: 1.4rem;
+}
+.davos-x__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.85rem 1.4rem;
+    border: 1px solid var(--gold-bright);
+    font-family: var(--font-sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.davos-x__btn svg { width: 16px; height: 16px; transition: transform 0.3s ease; }
+.davos-x__btn--primary { background: var(--gold-bright); color: #0b0907; }
+.davos-x__btn--primary:hover { background: #d8b45c; border-color: #d8b45c; }
+.davos-x__btn--primary:hover svg { transform: translateX(3px); }
+.davos-x__btn--ghost { color: var(--paper); border-color: rgba(251, 249, 245, 0.45); }
+.davos-x__btn--ghost:hover { border-color: var(--gold-bright); color: var(--gold-bright); }
+.davos-x__btn:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 3px; }
 
 .davos-x__disclaimer { max-width: none; margin: 0; font-family: var(--font-sans); font-size: 0.7rem; color: rgba(251, 249, 245, 0.4); }
 
@@ -5051,18 +5090,23 @@ section.tight { padding: clamp(2.2rem, 4vw, 3.5rem) 0; }
 .davos-x.is-visible .davos-x__countdown { transition-delay: 0.3s; }
 .davos-x.is-visible .davos-x__orb { transition-delay: 0.4s; }
 .davos-x.is-visible .davos-x__tags { transition-delay: 0.3s; }
+.davos-x.is-visible .davos-x__actions { transition-delay: 0.35s; }
 
 @media (max-width: 1024px) {
-    .davos-x__main { grid-template-columns: 1fr auto; }
-    .davos-x__headline { grid-column: 1 / -1; }
+    .davos-x__main {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "head head"
+            "count orb";
+    }
+    .davos-x__headline { max-width: none; }
 }
 @media (max-width: 720px) {
     .davos-x__shade { background: linear-gradient(0deg, rgba(11, 9, 7, 0.95) 0%, rgba(11, 9, 7, 0.7) 50%, rgba(11, 9, 7, 0.5) 100%); }
     .davos-x__top { letter-spacing: 0.22em; font-size: 0.66rem; }
-    .davos-x__main { grid-template-columns: 1fr auto; }
-    .davos-x__headline { grid-column: 1 / -1; }
     .davos-x__orb { width: 88px; }
-    .davos-x__countdown { gap: 0.3rem 0.9rem; }
+    .davos-x__btn { flex: 1 1 100%; justify-content: center; }
+    .davos-x__countdown { gap: 0.3rem 0.9rem; justify-self: start; }
     .davos-x__num { font-size: 1.6rem; }
     .davos-x__label { letter-spacing: 0.18em; }
 }

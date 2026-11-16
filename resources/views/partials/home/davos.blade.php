@@ -3,6 +3,7 @@
     $davosEvent = \App\Models\Event::query()->published()->where('slug', $davosSlug)->first();
     $davosImage = $davosEvent?->cover_url ?: 'https://images.unsplash.com/photo-1587952134350-d10487bc1c37?auto=format&fit=crop&w=1920&q=80';
     $davosUrl   = route('events.show', $davosSlug);
+    $davosContactUrl = route('contact', ['programme' => 'Davos 2027', 'destination' => 'Davos, Switzerland', 'service' => 'Delegation Management']);
     $davosStart = '2027-01-18T09:00:00+01:00';
     $davosItems = [
         ['title' => 'Accommodation',  'text' => 'Davos & Klosters, matched to delegation size and security needs.'],
@@ -28,14 +29,22 @@
     <div class="davos-x__main">
       <div class="davos-x__headline">
         <h2 class="davos-x__title" id="davos-heading" data-davos-reveal>
-          <a href="{{ $davosUrl }}">Davos <em>2027</em></a>
+          Attending Davos 2027? <em>We&rsquo;ll handle everything around it.</em>
         </h2>
-        <p class="davos-x__subtitle" data-davos-reveal>Executive Delegation Programme &mdash; one discreet team for your entire week.</p>
+        <p class="davos-x__subtitle" data-davos-reveal>For executives and delegations invited to the WEF Annual Meeting (18&ndash;22 January 2027), we arrange your accommodation, chauffeured transport, private meeting venues and security, all run by one team on the ground in Davos.</p>
         <p class="davos-x__tags" data-davos-reveal>
+          <span class="davos-x__tags-label">Included:</span>
           @foreach ($davosItems as $item)
-            <a href="{{ $davosUrl }}">{{ $item['title'] }}</a>
+            <span class="davos-x__tag">{{ $item['title'] }}</span>
           @endforeach
         </p>
+        <div class="davos-x__actions" data-davos-reveal>
+          <a class="davos-x__btn davos-x__btn--primary" href="{{ $davosContactUrl }}">
+            Plan your Davos week
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="davos-x__btn davos-x__btn--ghost" href="{{ $davosUrl }}">See the full programme</a>
+        </div>
       </div>
 
       <div class="davos-x__countdown" data-davos-countdown="{{ $davosStart }}" data-davos-reveal aria-label="Time until the Annual Meeting starts">

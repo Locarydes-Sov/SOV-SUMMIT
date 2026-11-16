@@ -61,23 +61,23 @@
       <label style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.88rem;">Service required*
         <select name="service" required style="padding:0.7rem;border:1px solid var(--line-strong);font-family:var(--font-sans);background:var(--paper);">
           <option value="">Select a service</option>
-          <option>Planning & Coordination</option>
-          <option>Management Training</option>
-          <option>Conference Planning</option>
-          <option>Delegation Management</option>
-          <option>Events & Productions</option>
-          <option>Security Coordination</option>
-          <option>Media Coverage</option>
-          <option>Travel & Experiences</option>
-          <option>Other</option>
+          <option @selected(old('service', request()->query('service')) === 'Planning & Coordination')>Planning & Coordination</option>
+          <option @selected(old('service', request()->query('service')) === 'Management Training')>Management Training</option>
+          <option @selected(old('service', request()->query('service')) === 'Conference Planning')>Conference Planning</option>
+          <option @selected(old('service', request()->query('service')) === 'Delegation Management')>Delegation Management</option>
+          <option @selected(old('service', request()->query('service')) === 'Events & Productions')>Events & Productions</option>
+          <option @selected(old('service', request()->query('service')) === 'Security Coordination')>Security Coordination</option>
+          <option @selected(old('service', request()->query('service')) === 'Media Coverage')>Media Coverage</option>
+          <option @selected(old('service', request()->query('service')) === 'Travel & Experiences')>Travel & Experiences</option>
+          <option @selected(old('service', request()->query('service')) === 'Other')>Other</option>
         </select>
       </label>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
         <label style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.88rem;">Event / programme type
-          <input type="text" name="programme_type" style="padding:0.7rem;border:1px solid var(--line-strong);font-family:var(--font-sans);" />
+          <input type="text" name="programme_type" value="{{ old('programme_type', request()->query('programme')) }}" style="padding:0.7rem;border:1px solid var(--line-strong);font-family:var(--font-sans);" />
         </label>
         <label style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.88rem;">Destination
-          <input type="text" name="destination" style="padding:0.7rem;border:1px solid var(--line-strong);font-family:var(--font-sans);" />
+          <input type="text" name="destination" value="{{ old('destination', request()->query('destination')) }}" style="padding:0.7rem;border:1px solid var(--line-strong);font-family:var(--font-sans);" />
         </label>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
@@ -95,7 +95,7 @@
         <input type="text" name="required_services" placeholder="e.g. venue, accommodation, transport" style="padding:0.7rem;border:1px solid var(--line-strong);font-family:var(--font-sans);" />
       </label>
       <label style="display:flex;flex-direction:column;gap:0.4rem;font-size:0.88rem;">Message*
-        <textarea name="message" rows="5" required style="padding:0.7rem;border:1px solid var(--line-strong);font-family:var(--font-sans);resize:vertical;"></textarea>
+        <textarea name="message" rows="5" required style="padding:0.7rem;border:1px solid var(--line-strong);font-family:var(--font-sans);resize:vertical;">{{ old('message', request()->query('message')) }}</textarea>
       </label>
       <label style="display:flex;align-items:flex-start;gap:0.6rem;font-size:0.85rem;color:var(--ink-soft);">
         <input type="checkbox" name="consent" required style="margin-top:0.2rem;" />
