@@ -3,10 +3,10 @@
 @php
     // --------- SEO / social precomputed values ---------
     $seoTitleBase  = $blog->seo_title ?: $blog->title;
-    $seoTitleFull  = $seoTitleBase . ' | SOV SUMMIT';
+    $seoTitleFull  = \App\Support\Seo::title($seoTitleBase);
     $seoSummary    = trim((string) ($blog->summary ?: 'An insight from the SOV SUMMIT coordination desk.'));
     $canonical     = url()->current();
-    $coverUrl      = $blog->cover_url ?: asset('assets/img/logo.webp');
+    $coverUrl      = $blog->cover_url ?: asset(\App\Support\Seo::DEFAULT_OG_IMAGE);
     $coverAlt      = $blog->cover_url ? ($blog->title . ' — cover image') : 'SOV SUMMIT';
 
     $publishedIso  = optional($blog->published_at)->toIso8601String();

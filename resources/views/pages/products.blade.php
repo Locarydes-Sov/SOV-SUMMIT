@@ -1,6 +1,6 @@
 @extends('layouts.site')
 
-@section('title', 'Products | SOV SUMMIT')
+@section('title', 'Solutions | SOV SUMMIT')
 @section('meta_description', 'Digital products by SOV SUMMIT — Attending Management and Event App — designed to streamline delegate coordination, registrations, communications, and on-site experience.')
 @section('canonical', 'https://sov-summit.com/products/')
 

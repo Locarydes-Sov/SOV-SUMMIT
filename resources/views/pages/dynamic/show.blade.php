@@ -2,10 +2,10 @@
 
 @php
     $seoTitleBase = $page->seo_title ?: $page->title;
-    $seoTitleFull = $seoTitleBase . ' | SOV SUMMIT';
+    $seoTitleFull = \App\Support\Seo::title($seoTitleBase);
     $seoSummary   = trim((string) ($page->seo_description ?: $page->summary ?: 'A page from SOV SUMMIT.'));
     $canonical    = url()->current();
-    $heroUrl      = $page->hero_url ?: asset('assets/img/logo.webp');
+    $heroUrl      = $page->hero_url ?: asset(\App\Support\Seo::DEFAULT_OG_IMAGE);
     $heroAlt      = $page->hero_url ? ($page->title . ' — page image') : 'SOV SUMMIT';
 
     $keywordsList = collect(explode(',', (string) $page->seo_keywords))

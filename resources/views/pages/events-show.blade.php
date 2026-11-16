@@ -3,10 +3,10 @@
 @php
     // --------- SEO / social precomputed values ---------
     $seoTitleBase = $event->seo_title ?: $event->title;
-    $seoTitleFull = $seoTitleBase . ' | SOV SUMMIT';
+    $seoTitleFull = \App\Support\Seo::title($seoTitleBase);
     $seoSummary   = trim((string) ($event->summary ?: 'A programme coordinated by SOV SUMMIT.'));
     $canonical    = url()->current();
-    $coverUrl     = $event->cover_url ?: asset('assets/img/logo.webp');
+    $coverUrl     = $event->cover_url ?: asset(\App\Support\Seo::DEFAULT_OG_IMAGE);
     $coverAlt     = $event->cover_url ? ($event->title . ' — event cover') : 'SOV SUMMIT';
 
     $startIso     = optional($event->event_date)->toIso8601String();

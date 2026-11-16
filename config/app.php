@@ -54,6 +54,12 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     /*
+    | Public domain used for canonical links, og:image, the sitemap and the
+    | www -> non-www redirect. No trailing slash.
+    */
+    'canonical_url' => rtrim((string) env('APP_CANONICAL_URL', 'https://sov-summit.com'), '/'),
+
+    /*
     |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------

@@ -1,8 +1,13 @@
 @php
-    $pageTitle = trim($__env->yieldContent('title')) ?: 'SOV SUMMIT | International Event Organisation & Coordination';
-    $pageDescription = trim($__env->yieldContent('meta_description')) ?: 'SOV SUMMIT coordinates international events, conferences, delegations, management training, travel experiences, security support, and media coverage for organisations, corporations, institutions, and private clients.';
-    $canonicalUrl = trim($__env->yieldContent('canonical')) ?: url()->current();
-    $ogImage = trim($__env->yieldContent('og_image')) ?: 'https://sov-summit.com/assets/img/logo.webp';
+    // @section('x', 'value') already HTML-escapes its value, and {{ }} escapes again below.
+    // Decode once here so "&" is shown as "&" (not "&amp;").
+    $sectionValue = fn (string $name): string => html_entity_decode(trim($__env->yieldContent($name)), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+    $pageTitle = $sectionValue('title') ?: 'SOV SUMMIT | International Event Organisation & Coordination';
+    $pageDescription = $sectionValue('meta_description') ?: 'SOV SUMMIT coordinates international events, conferences, delegations, management training, travel experiences, security support, and media coverage for organisations, corporations, institutions, and private clients.';
+    $canonicalUrl = \App\Support\Seo::canonical($sectionValue('canonical') ?: null);
+    $customOgImage = $sectionValue('og_image');
+    $ogImage = \App\Support\Seo::imageUrl($customOgImage ?: null);
 @endphp
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,6 +25,13 @@
 <meta property="og:description" content="{{ $pageDescription }}" />
 <meta property="og:url" content="{{ $canonicalUrl }}" />
 <meta property="og:image" content="{{ $ogImage }}" />
+@if ($customOgImage === '')
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="SOV SUMMIT — international events, delegations and executive programmes" />
+@endif
+<meta property="og:site_name" content="SOV SUMMIT" />
+<meta name="twitter:image" content="{{ $ogImage }}" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

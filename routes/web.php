@@ -17,11 +17,14 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SpecialOfferBookingController;
 use App\Http\Controllers\SpecialOfferController;
 use App\Models\Blog;
 use App\Models\Event;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('/', function () {
     $featuredEvents = Event::published()
