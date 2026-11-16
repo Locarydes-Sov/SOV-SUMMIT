@@ -130,7 +130,8 @@ function initCookieBanner() {
             '<button type="button" class="cookie-banner__close" data-cookie-action="close" aria-label="Close">&times;</button>' +
             '<div class="cookie-banner__icon" aria-hidden="true">' + COOKIE_ICON_SVG + '</div>' +
             '<p class="cookie-banner__title">We value your privacy</p>' +
-            '<p class="cookie-banner__text">This site uses cookies to keep the essentials working and, with your consent, to help us understand how the site is used. See our <a href="/cookie-policy/">Cookie Policy</a> and <a href="/privacy-policy/">Privacy Policy</a>.</p>' +
+            '<p class="cookie-banner__text">This site uses cookies to keep the essentials working and, with your consent, to help us understand how the site is used. See our <a href="/cookie-policy">Cookie Policy</a> and <a href="/privacy-policy">Privacy Policy</a>.</p>' +
+            '<p class="cookie-banner__text-short">We use cookies. <a href="/cookie-policy">Learn more</a></p>' +
             '<div class="cookie-banner__actions">' +
                 '<button type="button" class="cookie-banner__btn cookie-banner__btn--ghost" data-cookie-action="decline">Decline</button>' +
                 '<button type="button" class="cookie-banner__btn cookie-banner__btn--primary" data-cookie-action="accept">Accept</button>' +

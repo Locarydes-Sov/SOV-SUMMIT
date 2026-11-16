@@ -1,7 +1,7 @@
 @php
     $founder = [
         'name'  => 'Wali Akond',
-        'title' => 'Founder & Managing Director, SOV Summit',
+        'title' => 'Founder & Managing Director, SOV SUMMIT',
     ];
 @endphp
 <section class="welcome" aria-labelledby="welcome-heading">

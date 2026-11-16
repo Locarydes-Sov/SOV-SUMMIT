@@ -1,6 +1,6 @@
 @php $d = $section->data ?? []; @endphp
 <div class="cs-adm-field">
-    <label>Eyebrow <span class="cs-adm-hint-inline">(small gold label, e.g. "The SOV Summit Method")</span></label>
+    <label>Eyebrow <span class="cs-adm-hint-inline">(small gold label, e.g. "The SOV SUMMIT Method")</span></label>
     <input type="text" data-field="eyebrow" value="{{ $d['eyebrow'] ?? '' }}" placeholder="Optional short label">
 </div>
 <div class="cs-adm-field">

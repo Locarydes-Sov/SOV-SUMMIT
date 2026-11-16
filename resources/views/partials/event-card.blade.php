@@ -5,7 +5,7 @@
 <a class="event-card" href="{{ route('events.show', $event) }}" aria-label="{{ $event->title }}">
   <div class="event-card__media {{ $cover ? '' : 'event-card__media--empty' }}">
     @if ($cover)
-      <img src="{{ $cover }}" alt="" aria-hidden="true" loading="lazy" width="800" height="600">
+      <img src="{{ $cover }}" alt="{{ $event->title }}{{ $event->location ? ' — '.$event->location : '' }}" loading="lazy" width="800" height="600">
       <div class="event-card__overlay" aria-hidden="true"></div>
     @else
       <span class="event-card__placeholder" aria-hidden="true">

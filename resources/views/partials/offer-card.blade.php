@@ -9,7 +9,7 @@
 <a class="event-card offer-card" href="{{ route('special-offers.show', data_get($offer, 'uuid')) }}" aria-label="{{ data_get($offer, 'title') }}">
   <div class="event-card__media {{ $cover ? '' : 'event-card__media--empty' }}">
     @if ($cover)
-      <img src="{{ $cover }}" alt="" aria-hidden="true" loading="lazy" width="800" height="600">
+      <img src="{{ $cover }}" alt="{{ data_get($offer, 'title') }}{{ $city ? ' — '.$city : '' }}" loading="lazy" width="800" height="600">
       <div class="event-card__overlay" aria-hidden="true"></div>
     @endif
     @if ($category = data_get($offer, 'specialOfferCategory.name'))

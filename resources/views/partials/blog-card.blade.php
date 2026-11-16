@@ -5,7 +5,7 @@
 <a class="blog-card" href="{{ route('blog.show', $blog) }}" aria-label="{{ $blog->title }}">
   <div class="blog-card__media {{ $cover ? '' : 'blog-card__media--empty' }}">
     @if ($cover)
-      <img src="{{ $cover }}" alt="" aria-hidden="true" loading="lazy" width="800" height="600">
+      <img src="{{ $cover }}" alt="{{ $blog->title }}" loading="lazy" width="800" height="600">
       <div class="blog-card__overlay" aria-hidden="true"></div>
     @else
       <span class="blog-card__placeholder" aria-hidden="true">

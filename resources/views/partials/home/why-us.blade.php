@@ -9,7 +9,7 @@
 
     <div class="why-sov__compare">
       <article class="compare-card compare-card--before" aria-labelledby="compare-before">
-        <span class="compare-card__tag">Without Sov Summit</span>
+        <span class="compare-card__tag">Without SOV SUMMIT</span>
         <h3 id="compare-before">A fragmented market</h3>
         <div class="compare-card__viz compare-card__viz--scatter" aria-hidden="true">
           <span class="node" style="--x:12%;--y:22%;--d:0s"><span></span></span>
@@ -33,11 +33,11 @@
         <svg viewBox="0 0 60 60" width="46" height="46" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M8 30h44M38 16l14 14-14 14"/>
         </svg>
-        <span class="why-sov__transform-label">Sov Summit brings<br>the ecosystem together</span>
+        <span class="why-sov__transform-label">SOV SUMMIT brings<br>the ecosystem together</span>
       </div>
 
       <article class="compare-card compare-card--after" aria-labelledby="compare-after">
-        <span class="compare-card__tag">With Sov Summit</span>
+        <span class="compare-card__tag">With SOV SUMMIT</span>
         <h3 id="compare-after">One organised operation</h3>
         <div class="compare-card__viz compare-card__viz--hub" aria-hidden="true">
           <span class="hub-core"><span></span></span>

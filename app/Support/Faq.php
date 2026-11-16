@@ -17,15 +17,15 @@ class Faq
     {
         return collect([
             [
-                'question' => 'What does Sov Summit do?',
-                'group' => 'About SOV Summit',
+                'question' => 'What does SOV SUMMIT do?',
+                'group' => 'About SOV SUMMIT',
                 'featured' => true,
                 'answer' => <<<'HTML'
-<p>Sov Summit provides end-to-end event and delegation coordination. We help clients source, compare, coordinate, and supervise services such as chauffeur transportation, logistics, accommodation, event support, and other specialist services.</p>
+<p>SOV SUMMIT provides end-to-end event and delegation coordination. We help clients source, compare, coordinate, and supervise services such as chauffeur transportation, logistics, accommodation, event support, and other specialist services.</p>
 HTML,
             ],
             [
-                'question' => 'How can Sov Summit help with chauffeur services?',
+                'question' => 'How can SOV SUMMIT help with chauffeur services?',
                 'group' => 'Services',
                 'featured' => false,
                 'answer' => <<<'HTML'
@@ -34,7 +34,7 @@ HTML,
 HTML,
             ],
             [
-                'question' => 'Can Sov Summit arrange accommodation?',
+                'question' => 'Can SOV SUMMIT arrange accommodation?',
                 'group' => 'Services',
                 'featured' => false,
                 'answer' => <<<'HTML'
@@ -84,11 +84,11 @@ HTML,
             ],
             [
                 'question' => 'Why shouldn’t I contact the vendors directly?',
-                'group' => 'About SOV Summit',
+                'group' => 'About SOV SUMMIT',
                 'featured' => false,
                 'answer' => <<<'HTML'
 <p>You can, but managing multiple vendors can become time-consuming and complicated.</p>
-<p>Sov Summit provides a single coordination layer between you and the different suppliers, helping manage communication, scheduling, pricing, documentation, and execution.</p>
+<p>SOV SUMMIT provides a single coordination layer between you and the different suppliers, helping manage communication, scheduling, pricing, documentation, and execution.</p>
 HTML,
             ],
             [
@@ -96,7 +96,7 @@ HTML,
                 'group' => 'Delivery & technology',
                 'featured' => true,
                 'answer' => <<<'HTML'
-<p>Depending on the project scope, Sov Summit can provide dedicated coordination and operational supervision throughout the event or delegation.</p>
+<p>Depending on the project scope, SOV SUMMIT can provide dedicated coordination and operational supervision throughout the event or delegation.</p>
 HTML,
             ],
             [
@@ -104,7 +104,7 @@ HTML,
                 'group' => 'Delivery & technology',
                 'featured' => false,
                 'answer' => <<<'HTML'
-<p>We work to identify reliable providers and maintain operational oversight. Where applicable and contractually agreed, Sov Summit can provide service guarantees or remedies for qualifying service failures.</p>
+<p>We work to identify reliable providers and maintain operational oversight. Where applicable and contractually agreed, SOV SUMMIT can provide service guarantees or remedies for qualifying service failures.</p>
 HTML,
             ],
             [
@@ -112,7 +112,7 @@ HTML,
                 'group' => 'Delivery & technology',
                 'featured' => false,
                 'answer' => <<<'HTML'
-<p>Sov Summit is designed to organize services through a central digital platform, giving clients an easier way to manage vendors, services, schedules, and operational information.</p>
+<p>SOV SUMMIT is designed to organize services through a central digital platform, giving clients an easier way to manage vendors, services, schedules, and operational information.</p>
 HTML,
             ],
             [
@@ -124,7 +124,7 @@ HTML,
 HTML,
             ],
             [
-                'question' => 'Can Sov Summit handle VIP or diplomatic delegations?',
+                'question' => 'Can SOV SUMMIT handle VIP or diplomatic delegations?',
                 'group' => 'Services',
                 'featured' => true,
                 'answer' => <<<'HTML'
@@ -136,7 +136,7 @@ HTML,
                 'group' => 'Services',
                 'featured' => true,
                 'answer' => <<<'HTML'
-<p>Yes. Sov Summit can source and coordinate services across multiple destinations through its network of local and international partners.</p>
+<p>Yes. SOV SUMMIT can source and coordinate services across multiple destinations through its network of local and international partners.</p>
 HTML,
             ],
             [
@@ -144,11 +144,11 @@ HTML,
                 'group' => 'Services',
                 'featured' => false,
                 'answer' => <<<'HTML'
-<p>Sov Summit can coordinate appropriate third-party security or related services where required. We do not present ourselves as a licensed security provider unless the relevant service is provided by an appropriately licensed partner.</p>
+<p>SOV SUMMIT can coordinate appropriate third-party security or related services where required. We do not present ourselves as a licensed security provider unless the relevant service is provided by an appropriately licensed partner.</p>
 HTML,
             ],
             [
-                'question' => 'How far in advance should I contact Sov Summit?',
+                'question' => 'How far in advance should I contact SOV SUMMIT?',
                 'group' => 'Getting started',
                 'featured' => true,
                 'answer' => <<<'HTML'
@@ -160,7 +160,7 @@ HTML,
                 'group' => 'Services',
                 'featured' => false,
                 'answer' => <<<'HTML'
-<p>Yes. You can use Sov Summit for a single requirement &mdash; such as chauffeur transportation or accommodation &mdash; or for complete event and delegation coordination.</p>
+<p>Yes. You can use SOV SUMMIT for a single requirement &mdash; such as chauffeur transportation or accommodation &mdash; or for complete event and delegation coordination.</p>
 HTML,
             ],
             [
@@ -184,20 +184,20 @@ HTML,
 HTML,
             ],
             [
-                'question' => 'What is the main advantage of using Sov Summit?',
-                'group' => 'About SOV Summit',
+                'question' => 'What is the main advantage of using SOV SUMMIT?',
+                'group' => 'About SOV SUMMIT',
                 'featured' => false,
                 'answer' => <<<'HTML'
-<p>The event-services market is fragmented. Instead of managing numerous suppliers yourself, Sov Summit brings the relevant services together into one coordinated solution.</p>
+<p>The event-services market is fragmented. Instead of managing numerous suppliers yourself, SOV SUMMIT brings the relevant services together into one coordinated solution.</p>
 <p><strong>We source. We verify. We negotiate. We coordinate. We supervise.</strong></p>
 HTML,
             ],
             [
-                'question' => 'What makes Sov Summit different?',
-                'group' => 'About SOV Summit',
+                'question' => 'What makes SOV SUMMIT different?',
+                'group' => 'About SOV SUMMIT',
                 'featured' => false,
                 'answer' => <<<'HTML'
-<p>Sov Summit combines specialist advisors, a vendor network, commercial sourcing, operational coordination, and technology.</p>
+<p>SOV SUMMIT combines specialist advisors, a vendor network, commercial sourcing, operational coordination, and technology.</p>
 <p>Our objective is simple: <em>give you one place to organize multiple services &mdash; with transparency, control, and professional execution.</em></p>
 HTML,
             ],

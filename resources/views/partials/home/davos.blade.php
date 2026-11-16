@@ -15,8 +15,8 @@
 <section class="davos-wrap" aria-labelledby="davos-heading">
   <div class="container">
 <div class="davos-x" data-davos>
-  <div class="davos-x__media" aria-hidden="true">
-    <img class="davos-x__image" src="{{ $davosImage }}" alt="" loading="lazy" width="1920" height="1080" data-davos-parallax />
+  <div class="davos-x__media">
+    <img class="davos-x__image" src="{{ $davosImage }}" alt="Davos in winter, the alpine town that hosts the WEF Annual Meeting" loading="lazy" width="1920" height="1080" data-davos-parallax />
   </div>
   <div class="davos-x__shade" aria-hidden="true"></div>
 

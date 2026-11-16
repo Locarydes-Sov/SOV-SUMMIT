@@ -2,8 +2,8 @@
   <div class="container">
     <header class="section-head wide">
       <span class="eyebrow">Frequently Asked</span>
-      <h2 id="faq-heading">Sov Summit &mdash; Frequently Asked Questions.</h2>
-      <p class="lede">A short overview of how Sov Summit sources, coordinates, and supervises services across events and delegations.</p>
+      <h2 id="faq-heading">SOV SUMMIT &mdash; Frequently Asked Questions.</h2>
+      <p class="lede">A short overview of how SOV SUMMIT sources, coordinates, and supervises services across events and delegations.</p>
     </header>
 
     @include('partials.faq-list', ['items' => \App\Support\Faq::featured()])

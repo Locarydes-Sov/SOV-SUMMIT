@@ -6,11 +6,11 @@
     $isSampleTestimonials = $testimonials === [];
     if ($isSampleTestimonials) {
         $testimonials = [
-            ['sector' => 'Corporate Summit', 'quote' => 'Working with SOV Summit was an excellent experience. Their professionalism, attention to detail, and ability to manage every aspect of the event made the entire process seamless. We look forward to working together again.', 'name' => 'James Richardson', 'role' => 'Managing Director'],
-            ['sector' => 'International Conference', 'quote' => 'SOV Summit demonstrated exceptional expertise in coordinating our international conference. From the initial planning to the final execution, everything was handled with precision and professionalism.', 'name' => 'Sarah Mitchell', 'role' => 'Conference Director'],
+            ['sector' => 'Corporate Summit', 'quote' => 'Working with SOV SUMMIT was an excellent experience. Their professionalism, attention to detail, and ability to manage every aspect of the event made the entire process seamless. We look forward to working together again.', 'name' => 'James Richardson', 'role' => 'Managing Director'],
+            ['sector' => 'International Conference', 'quote' => 'SOV SUMMIT demonstrated exceptional expertise in coordinating our international conference. From the initial planning to the final execution, everything was handled with precision and professionalism.', 'name' => 'Sarah Mitchell', 'role' => 'Conference Director'],
             ['sector' => 'Executive Training', 'quote' => 'The training programme was thoughtfully designed and professionally delivered. The team created an engaging environment that encouraged meaningful discussions, knowledge sharing, and valuable connections.', 'name' => 'Alexander Bennett', 'role' => 'Head of Learning & Development'],
-            ['sector' => 'Government & Institutional Events', 'quote' => 'Delivering an event of this scale requires strong coordination, strategic thinking, and attention to every detail. SOV Summit exceeded our expectations and ensured a smooth and successful experience.', 'name' => 'Olivia Thompson', 'role' => 'Senior Programme Manager'],
-            ['sector' => 'Strategic Partnership', 'quote' => 'What truly sets SOV Summit apart is their commitment to quality and collaborative approach. They understood our vision and transformed it into an experience that was both impactful and memorable.', 'name' => 'Daniel Foster', 'role' => 'Chief Executive Officer'],
+            ['sector' => 'Government & Institutional Events', 'quote' => 'Delivering an event of this scale requires strong coordination, strategic thinking, and attention to every detail. SOV SUMMIT exceeded our expectations and ensured a smooth and successful experience.', 'name' => 'Olivia Thompson', 'role' => 'Senior Programme Manager'],
+            ['sector' => 'Strategic Partnership', 'quote' => 'What truly sets SOV SUMMIT apart is their commitment to quality and collaborative approach. They understood our vision and transformed it into an experience that was both impactful and memorable.', 'name' => 'Daniel Foster', 'role' => 'Chief Executive Officer'],
         ];
     }
 @endphp

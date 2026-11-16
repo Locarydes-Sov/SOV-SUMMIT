@@ -18,7 +18,7 @@
 
   <div class="hero-split">
     <div class="hero-copy">
-      <p class="hero-eyebrow reveal" data-reveal="up"><span class="hero-eyebrow__line" aria-hidden="true"></span>Welcome to SOV Summit</p>
+      <p class="hero-eyebrow reveal" data-reveal="up"><span class="hero-eyebrow__line" aria-hidden="true"></span>Welcome to SOV SUMMIT</p>
       <h1 class="hero-headline" data-reveal-words>
         Summits and private events, <em>orchestrated in every detail.</em>
       </h1>
