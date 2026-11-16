@@ -39,7 +39,6 @@
   <h2>Copyright</h2>
   <p>The content, layout, and design of this website are protected by copyright. Reproduction, in whole or in part, requires prior written consent from Sovereign Summit GmbH.</p>
 
-  <p class="muted" style="margin-top:2rem;font-size:0.85rem;">This legal notice is provided as a starting template and should be reviewed by qualified legal counsel before publication to ensure full compliance with Swiss law and any other applicable jurisdictions.</p>
 </div>
 </div></section>
 @endsection
