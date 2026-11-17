@@ -36,7 +36,7 @@
       <p class="muted" style="margin-bottom:0.3rem;">Sovereign Summit GmbH</p>
       <p class="muted" style="margin-bottom:0.3rem;">Bahnhofstrasse 21, 6300 Zug, Switzerland</p>
       <p class="muted" style="margin-bottom:0.3rem;"><a href="mailto:info@sov-summit.com" style="color:var(--gold);">info@sov-summit.com</a></p>
-      <p class="muted"><a href="https://wa.me/41798763573" style="color:var(--gold);">WhatsApp +41 79 876 35 73</a></p>
+      <p class="muted"><a href="https://wa.me/41715392300" style="color:var(--gold);">WhatsApp +41 71 539 23 00</a></p>
     </div>
   </div>
   <div>

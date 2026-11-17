@@ -24,7 +24,7 @@
   <p>Sovereign Summit GmbH<br>Bahnhofstrasse 21<br>6300 Zug, Switzerland</p>
   <p>Commercial register UID: CHE-282.946.999<br>Registration number: CH-170.4.0251299</p>
   <p>Email: <a href="mailto:info@sov-summit.com" style="color:var(--gold);">info@sov-summit.com</a><br>
-  WhatsApp: +41 79 876 35 73<br>
+  WhatsApp: +41 71 539 23 00<br>
   Website: sov-summit.com</p>
 
   <h2>Brand</h2>

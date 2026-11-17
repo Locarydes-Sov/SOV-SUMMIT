@@ -23,7 +23,7 @@ return [
         'name' => env('INVOICE_COMPANY_NAME', 'Sovereign Summit GmbH'),
         'address' => env('INVOICE_COMPANY_ADDRESS', "Bahnhofstrasse 21\n6300 Zug, Switzerland"),
         'email' => env('INVOICE_COMPANY_EMAIL', 'info@sov-summit.com'),
-        'phone' => env('INVOICE_COMPANY_PHONE', '+41 79 876 35 73'),
+        'phone' => env('INVOICE_COMPANY_PHONE', '+41 71 539 23 00'),
         'website' => env('INVOICE_COMPANY_WEBSITE', 'sov-summit.com'),
         'vat_no' => env('INVOICE_COMPANY_VAT_NO'),
         // Relative to /public — PNG or JPG works best with DomPDF.

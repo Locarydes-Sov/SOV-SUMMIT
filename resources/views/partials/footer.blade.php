@@ -36,7 +36,7 @@
           <li>Bahnhofstrasse 21</li>
           <li>6300 Zug, Switzerland</li>
           <li><a href="mailto:info@sov-summit.com">info@sov-summit.com</a></li>
-          <li><a href="https://wa.me/41798763573">+41 79 876 35 73</a></li>
+          <li><a href="https://wa.me/41715392300">+41 71 539 23 00</a></li>
         </ul>
       </div>
     </div>
