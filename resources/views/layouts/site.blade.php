@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-@production
 <!-- Google Tag Manager -->
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -11,7 +10,6 @@
 </script>
 <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-N5825MP2"></script>
 <!-- End Google Tag Manager -->
-@endproduction
 @include('partials.head-meta')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}?v={{ @filemtime(public_path('assets/css/style.css')) }}" />
@@ -20,11 +18,9 @@
 @stack('head')
 </head>
 <body>
-@production
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5825MP2" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-@endproduction
 <a class="skip-link" href="#main" style="position:absolute;left:-9999px;">Skip to content</a>
 @include('partials.header')
 @yield('breadcrumb')
