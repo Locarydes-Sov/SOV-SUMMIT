@@ -13,25 +13,9 @@
 
     $orgName    = 'SOV SUMMIT';
     $orgLogoUrl = 'https://sov-summit.com/assets/img/logo.webp';
-    $siteBase   = rtrim(config('app.url', 'https://sov-summit.com'), '/');
+    $siteBase   = \App\Support\Seo::baseUrl();
 
-    $organizationLd = [
-        '@context'  => 'https://schema.org',
-        '@type'     => 'Organization',
-        'name'      => $orgName,
-        'legalName' => 'Sovereign Summit GmbH',
-        'url'       => $siteBase,
-        'logo'      => $orgLogoUrl,
-        'email'     => 'info@sov-summit.com',
-        'address'   => [
-            '@type'          => 'PostalAddress',
-            'streetAddress'  => 'Bahnhofstrasse 21',
-            'addressLocality' => 'Zug',
-            'postalCode'     => '6300',
-            'addressCountry' => 'CH',
-        ],
-        'slogan' => 'People. Ideas. Impact.',
-    ];
+    $organizationLd = \App\Support\Seo::organization();
 
     $breadcrumbLd = [
         '@context'        => 'https://schema.org',
@@ -49,10 +33,10 @@
         'name'        => $service->title,
         'description' => $seoSummary,
         'url'         => $canonical,
-        'provider'    => ['@type' => 'Organization', 'name' => $orgName, 'url' => $siteBase],
+        'provider'    => \App\Support\Seo::organizationReference(),
         'areaServed'  => 'Worldwide',
         'image'       => $service->hero_url ?: null,
-        'serviceType' => $service->eyebrow ?: null,
+        'serviceType' => $service->eyebrow ? \Illuminate\Support\Str::title(mb_strtolower($service->eyebrow)) : $service->title,
     ], fn ($v) => !is_null($v));
 
     $faqLd = null;
@@ -70,12 +54,11 @@
 @endphp
 
 @section('title', $seoTitleFull)
-@section('meta_description', $seoSummary)
+@section('meta_description', \App\Support\Seo::description($seoSummary))
 @section('canonical', $canonical)
 @section('og_image', $heroUrl)
 
 @push('head')
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
 @if ($keywordsList->isNotEmpty())
 <meta name="keywords" content="{{ $keywordsList->implode(', ') }}" />

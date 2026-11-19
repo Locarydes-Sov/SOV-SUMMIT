@@ -1,18 +1,11 @@
 @extends('layouts.site')
 
-@section('title', 'Event Organisation, Delegations & Travel Coordination | SOV SUMMIT')
-@section('meta_description', 'Explore SOV SUMMIT services, including event planning, conference organisation, delegation management, management training, travel coordination, security support, and media coverage.')
+@section('title', 'Event, Delegation & Travel Coordination Services | SOV SUMMIT')
+@section('meta_description', 'SOV SUMMIT services: event planning, conferences, delegation management, management training, travel, security coordination and media coverage.')
 @section('canonical', url()->to('/services'))
 
 @push('head')
-<script type="application/ld+json">{!! json_encode([
-    '@@context' => 'https://schema.org', '@type' => 'Organization',
-    'name' => 'SOV SUMMIT', 'legalName' => 'Sovereign Summit GmbH',
-    'url' => 'https://sov-summit.com/', 'logo' => 'https://sov-summit.com/assets/img/logo.webp',
-    'email' => 'info@sov-summit.com',
-    'address' => ['@type' => 'PostalAddress', 'streetAddress' => 'Bahnhofstrasse 21', 'addressLocality' => 'Zug', 'postalCode' => '6300', 'addressCountry' => 'CH'],
-    'slogan' => 'People. Ideas. Impact.',
-], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+@include('partials.schema-organization')
 <script type="application/ld+json">{!! json_encode([
     '@@context' => 'https://schema.org', '@type' => 'BreadcrumbList',
     'itemListElement' => [
@@ -29,8 +22,8 @@
 @section('content')
 <section class=""><div class="container">
 <div class="section-head wide">
-  <p class="brandline">SERVICES</p>
-  <h1>Planning. Connecting. Delivering.</h1>
+  <p class="brandline">PLANNING. CONNECTING. DELIVERING.</p>
+  <h1>Event, delegation and travel coordination services</h1>
   <p class="lede">SOV SUMMIT coordinates the people, providers, and operational details behind successful events, international programmes, management training, and travel experiences.</p>
 </div>
 </div></section>

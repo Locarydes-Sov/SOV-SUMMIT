@@ -21,9 +21,9 @@ class SeoTest extends TestCase
 
     public function test_ampersand_in_page_title_is_escaped_only_once(): void
     {
-        $this->get('/insights')
+        $this->get('/events')
             ->assertOk()
-            ->assertSee('<title>SOV SUMMIT Insights | Events, Travel &amp; Management</title>', false)
+            ->assertSee('<title>Executive Events &amp; Delegation Programmes | SOV SUMMIT</title>', false)
             ->assertDontSee('&amp;amp;', false);
     }
 
@@ -42,9 +42,9 @@ class SeoTest extends TestCase
 
     public function test_canonical_and_default_og_image_use_the_canonical_domain_without_trailing_slash(): void
     {
-        $this->get('/insights')
+        $this->get('/about')
             ->assertOk()
-            ->assertSee('<link rel="canonical" href="https://sov-summit.com/insights" />', false)
+            ->assertSee('<link rel="canonical" href="https://sov-summit.com/about" />', false)
             ->assertSee('<meta property="og:image" content="https://sov-summit.com/assets/img/og/sov-summit-og.jpg" />', false)
             ->assertSee('<meta property="og:image:width" content="1200" />', false);
     }

@@ -5,6 +5,17 @@
         <img class="footer-logo" src="{{ asset('assets/img/logo/sov-summit_header_gold.webp') }}" alt="SOV SUMMIT" width="688" height="96" loading="lazy" />
         <p class="brandline">PEOPLE &middot; IDEAS &middot; IMPACT<br>Planning. Connecting. Delivering.</p>
         <p>SOV SUMMIT coordinates international events, management training, delegations, travel experiences, security support, and media coverage for organisations, corporations, institutions, and private clients.</p>
+        @php
+            $socialLabels = ['linkedin' => 'LinkedIn', 'instagram' => 'Instagram', 'facebook' => 'Facebook', 'x' => 'X', 'youtube' => 'YouTube'];
+            $socialLinks = \App\Support\Seo::socialLinks();
+        @endphp
+        @if ($socialLinks !== [])
+          <p class="footer-social">
+            @foreach ($socialLinks as $network => $url)
+              <a href="{{ $url }}" target="_blank" rel="noopener me">{{ $socialLabels[$network] ?? ucfirst($network) }}</a>@unless ($loop->last) &middot; @endunless
+            @endforeach
+          </p>
+        @endif
       </div>
       <div class="footer-col">
         <h4>Site</h4>
@@ -15,7 +26,7 @@
           <li><a href="/management-training">Management Training</a></li>
           <li><a href="/events">Events</a></li>
           <li><a href="/services/travel-experiences">Travel & Experiences</a></li>
-          <li><a href="/insights">Insights</a></li>
+          <li><a href="/blog">Insights</a></li>
           <li><a href="/faq">FAQ</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>

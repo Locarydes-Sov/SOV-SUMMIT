@@ -22,12 +22,11 @@
 @endphp
 
 @section('title', $seoTitleFull)
-@section('meta_description', $seoSummary)
+@section('meta_description', \App\Support\Seo::description($seoSummary))
 @section('canonical', $canonical)
 @section('og_image', $heroUrl)
 
 @push('head')
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 @if ($keywordsList->isNotEmpty())
 <meta name="keywords" content="{{ $keywordsList->implode(', ') }}" />
 @endif

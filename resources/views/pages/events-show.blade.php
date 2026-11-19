@@ -19,54 +19,59 @@
         ->values();
 
     $orgName    = 'SOV SUMMIT';
-    $orgLogoUrl = 'https://sov-summit.com/assets/img/logo.webp';
-    $siteBase   = rtrim(config('app.url', 'https://sov-summit.com'), '/');
 
-    // --------- Structured data: Event ---------
-    $eventLd = array_filter([
-        '@context'            => 'https://schema.org',
-        '@type'               => 'Event',
-        'name'                => $event->title,
-        'description'         => $seoSummary,
-        'url'                 => $canonical,
-        'startDate'           => $startIso,
-        'eventStatus'         => 'https://schema.org/EventScheduled',
-        'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
-        'inLanguage'          => 'en',
-        'image'               => $event->cover_url ? [
-            '@type'  => 'ImageObject',
-            'url'    => $event->cover_url,
-            'width'  => 1600,
-            'height' => 900,
-        ] : null,
-        'location' => $event->location ? [
-            '@type'   => 'Place',
-            'name'    => $event->location,
-            'address' => [
-                '@type'          => 'PostalAddress',
-                'addressLocality' => $event->location,
-            ],
-        ] : [
-            '@type' => 'VirtualLocation',
-            'url'   => $canonical,
-        ],
-        'organizer' => [
-            '@type' => 'Organization',
-            'name'  => $orgName,
-            'url'   => $siteBase,
-            'logo'  => [
-                '@type'  => 'ImageObject',
-                'url'    => $orgLogoUrl,
-                'width'  => 512,
-                'height' => 512,
-            ],
-        ],
-        'performer' => [
-            '@type' => 'Organization',
-            'name'  => $orgName,
-        ],
-        'keywords' => $keywordsList->isNotEmpty() ? $keywordsList->implode(', ') : null,
-    ], fn ($v) => !is_null($v));
+    // --------- Structured data ---------
+    // "Davos, Switzerland" -> locality "Davos", country "Switzerland".
+    $locationParts = collect(explode(',', (string) $event->location))->map(fn ($part) => trim($part))->filter()->values();
+    $placeLd = $event->location ? [
+        '@type'   => 'Place',
+        'name'    => $event->location,
+        'address' => array_filter([
+            '@type'           => 'PostalAddress',
+            'addressLocality' => $locationParts->first(),
+            'addressCountry'  => $locationParts->count() > 1 ? $locationParts->last() : null,
+        ]),
+    ] : null;
+    $imageLd = $event->cover_url ? [
+        '@type'  => 'ImageObject',
+        'url'    => $event->cover_url,
+        'width'  => 1600,
+        'height' => 900,
+    ] : null;
+
+    // Upcoming programmes are Events. Past programmes are shown as case studies (Article),
+    // so search engines do not list them as events that can still be attended.
+    $eventLd = $isPast
+        ? array_filter([
+            '@context'         => 'https://schema.org',
+            '@type'            => 'Article',
+            'headline'         => \Illuminate\Support\Str::limit($event->title, 110, ''),
+            'description'      => $seoSummary,
+            'url'              => $canonical,
+            'mainEntityOfPage' => $canonical,
+            'datePublished'    => $startIso,
+            'dateModified'     => $modifiedIso,
+            'image'            => $imageLd,
+            'contentLocation'  => $placeLd,
+            'author'           => \App\Support\Seo::organizationReference(),
+            'publisher'        => \App\Support\Seo::organizationReference(),
+            'keywords'         => $keywordsList->isNotEmpty() ? $keywordsList->implode(', ') : null,
+        ], fn ($v) => !is_null($v))
+        : array_filter([
+            '@context'            => 'https://schema.org',
+            '@type'               => 'Event',
+            'name'                => $event->title,
+            'description'         => $seoSummary,
+            'url'                 => $canonical,
+            'startDate'           => $startIso,
+            'eventStatus'         => 'https://schema.org/EventScheduled',
+            'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+            'inLanguage'          => 'en',
+            'image'               => $imageLd,
+            'location'            => $placeLd,
+            'organizer'           => \App\Support\Seo::organizationReference(),
+            'keywords'            => $keywordsList->isNotEmpty() ? $keywordsList->implode(', ') : null,
+        ], fn ($v) => !is_null($v));
 
     $breadcrumbLd = [
         '@context'        => 'https://schema.org',
@@ -80,13 +85,12 @@
 @endphp
 
 @section('title', $seoTitleFull)
-@section('meta_description', $seoSummary)
+@section('meta_description', \App\Support\Seo::description($seoSummary))
 @section('canonical', $canonical)
 @section('og_image', $coverUrl)
 
 @push('head')
 {{-- Discoverability --}}
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
 @if ($keywordsList->isNotEmpty())
 <meta name="keywords" content="{{ $keywordsList->implode(', ') }}" />

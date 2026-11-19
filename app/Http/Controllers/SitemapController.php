@@ -28,7 +28,6 @@ class SitemapController extends Controller
         '/events' => '0.9',
         '/special-offers' => '0.7',
         '/blog' => '0.7',
-        '/insights' => '0.6',
         '/contact' => '0.8',
         '/faq' => '0.6',
         '/legal-notice' => '0.2',

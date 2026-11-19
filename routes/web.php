@@ -17,6 +17,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\LlmsTxtController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\SpecialOfferBookingController;
 use App\Http\Controllers\SpecialOfferController;
@@ -26,6 +27,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+Route::get('/llms.txt', LlmsTxtController::class)->name('llms');
 
 Route::get('/', function () {
     $daysFromToday = DB::connection()->getDriverName() === 'sqlite'
@@ -61,7 +63,7 @@ Route::post('/special-offers/{uuid}/book', [SpecialOfferBookingController::class
 Route::get('/special-offers/{uuid}/{slug?}', [SpecialOfferController::class, 'show'])->name('special-offers.show');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
-Route::view('/insights', 'pages.insights');
+Route::permanentRedirect('/insights', '/blog');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::view('/faq', 'pages.faq')->name('faq');
 Route::view('/legal-notice', 'pages.legal.notice');

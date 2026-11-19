@@ -23,7 +23,7 @@
         ['label' => 'Management Training', 'href' => '/management-training',          'match' => 'management-training*'],
         ['label' => 'Events',   'href' => '/events',                       'match' => 'events*'],
         ['label' => 'Offers',   'href' => '/special-offers',               'match' => 'special-offers*'],
-        ['label' => 'Insights', 'href' => '/insights',                     'match' => 'insights*'],
+        ['label' => 'Insights', 'href' => '/blog',                         'match' => 'blog*'],
     ];
 @endphp
 <header class="site-header">

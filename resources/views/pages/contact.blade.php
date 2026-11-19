@@ -1,12 +1,12 @@
 @extends('layouts.site')
 
-@section('title', 'Contact SOV SUMMIT | International Event and Travel Coordination')
+@section('title', 'Contact SOV SUMMIT | Event & Delegation Coordination')
 @section('meta_description', 'Contact SOV SUMMIT for event planning, conferences, delegations, management training, travel experiences, security coordination, and media coverage.')
 @section('canonical', 'https://sov-summit.com/contact/')
 
 @push('head')
-<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "Organization", "name": "SOV SUMMIT", "legalName": "Sovereign Summit GmbH", "url": "https://sov-summit.com/", "logo": "https://sov-summit.com/assets/img/logo.webp", "email": "info@sov-summit.com", "address": {"@type": "PostalAddress", "streetAddress": "Bahnhofstrasse 21", "addressLocality": "Zug", "postalCode": "6300", "addressCountry": "CH"}, "slogan": "People. Ideas. Impact."}' !!}</script>
-<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://sov-summit.com/contact/"}]}' !!}</script>
+@include('partials.schema-organization')
+<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "Contact", "item": "https://sov-summit.com/contact"}]}' !!}</script>
 @endpush
 
 @section('breadcrumb')
@@ -34,8 +34,9 @@
     <div style="margin-top:2rem;border-top:1px solid var(--line);padding-top:1.5rem;">
       <p style="margin-bottom:0.3rem;font-weight:700;">SOV SUMMIT</p>
       <p class="muted" style="margin-bottom:0.3rem;">Sovereign Summit GmbH</p>
-      <p class="muted" style="margin-bottom:0.3rem;">Bahnhofstrasse 21, 6300 Zug, Switzerland</p>
+      <p class="muted" style="margin-bottom:0.3rem;"><a href="https://www.google.com/maps/search/?api=1&amp;query=Bahnhofstrasse+21%2C+6300+Zug%2C+Switzerland" target="_blank" rel="noopener" style="color:inherit;">Bahnhofstrasse 21, 6300 Zug, Switzerland</a></p>
       <p class="muted" style="margin-bottom:0.3rem;"><a href="mailto:info@sov-summit.com" style="color:var(--gold);">info@sov-summit.com</a></p>
+      <p class="muted" style="margin-bottom:0.3rem;"><a href="tel:+41715392300" style="color:var(--gold);">Phone +41 71 539 23 00</a></p>
       <p class="muted"><a href="https://wa.me/41715392300" style="color:var(--gold);">WhatsApp +41 71 539 23 00</a></p>
     </div>
   </div>

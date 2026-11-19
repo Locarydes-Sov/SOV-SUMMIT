@@ -72,40 +72,42 @@ Decision: keep `/management-training` (it is a top-level menu item and `Service:
 - [x] Tests: `SeoTest`, `SpecialOfferTest`. New `ServiceFactory`.
 
 ### Brand entity (for AI search)
-- [ ] One shared Organization schema with `sameAs`, `telephone` (+41 71 539 23 00), `contactPoint`, `foundingDate`, `areaServed`, `logo` as ImageObject, `@id`.
-- [ ] Create / claim: LinkedIn company page, Google Business Profile (Zug), Crunchbase, Wikidata.
-- [ ] Add social links to the footer.
-- [ ] Add `public/llms.txt` (company summary, services + URLs, key event pages, contact).
+- [x] One shared Organization schema (`Seo::organization()`, `partials/schema-organization`, `config/seo.php`) with `@id`, telephone, contactPoint, areaServed, logo ImageObject. Event/Service/Blog schema point to it with `Seo::organizationReference()` and use `Seo::baseUrl()` (no more dev URL).
+- [ ] Set `SEO_FOUNDING_DATE` in `.env` (founding year) — needs your info.
+- [ ] Create / claim: LinkedIn company page, Google Business Profile (Zug), Crunchbase, Wikidata. Then add the URLs to `.env`: `SOCIAL_LINKEDIN_URL`, `SOCIAL_INSTAGRAM_URL`, `SOCIAL_FACEBOOK_URL`, `SOCIAL_X_URL`, `SOCIAL_YOUTUBE_URL`, `PROFILE_CRUNCHBASE_URL`, `PROFILE_WIKIDATA_URL`, `PROFILE_GOOGLE_BUSINESS_URL`.
+- [x] Footer shows social links automatically once the `.env` URLs are set.
+- [x] `/llms.txt` route (`LlmsTxtController`): company facts, published services, upcoming programmes, posts, key pages.
 
 ### Titles & descriptions
-- [ ] `/events` title (19 chars) → e.g. "Executive Events & Delegation Programmes | SOV SUMMIT"
-- [ ] `/blog` title (20 chars) → add keyword
-- [ ] `/products` title "Solutions | SOV SUMMIT" → name the apps
-- [ ] `/special-offers` title (27 chars) + description (101 chars) → longer
-- [ ] `/events/sovereign-executive-forum` title (103 chars) → about 60 chars
-- [ ] Cut descriptions over 160 chars: Home (216), Davos (270), Doha (253), ADFW (273)
+- [x] `/events` title (19 chars) → e.g. "Executive Events & Delegation Programmes | SOV SUMMIT"
+- [x] `/blog` title (20 chars) → add keyword
+- [x] `/products` title "Solutions | SOV SUMMIT" → name the apps
+- [x] `/special-offers` title (27 chars) + description (101 chars) → longer
+- [x] `/events/sovereign-executive-forum` title (103 chars) → about 60 chars (migration `2026_11_19_000000_…`)
+- [x] Cut descriptions over 160 chars: Home rewritten; event/blog/service/page descriptions cut at a word with `Seo::description()`
 
 ### H1s
-- [ ] `/about` "People. Ideas. Impact." → topic H1 (keep slogan as sub-line)
-- [ ] `/services` "Planning. Connecting. Delivering." → topic H1
-- [ ] `/services/media-coverage` "Capture the moments that matter" → topic H1
-- [ ] `/insights` "Insights" → more specific H1
+- [x] `/about` "People. Ideas. Impact." → topic H1 (keep slogan as sub-line)
+- [x] `/services` "Planning. Connecting. Delivering." → topic H1
+- [x] `/services/media-coverage` "Capture the moments that matter" → topic H1 (migration by slug)
+- [x] `/insights` → now 301 to `/blog` (page was only "coming soon")
 
 ---
 
 ## P2 — Medium
 
 ### Schema details
-- [ ] Event schema: add `endDate`, full `PostalAddress` with `addressCountry`, remove `performer` or add `offers`.
-- [ ] Past/private case studies (Alpine Dinner, Private Family Journey, Media Coordination) → `Article` / `CreativeWork`, not `Event`.
+- [x] Event schema: `addressCountry` from location, `performer` removed.
+- [ ] Event `endDate`: needs a new `end_date` field in the events table + admin form.
+- [x] Past programmes → `Article` (case study); upcoming → `Event`.
 - [ ] Davos / Doha / ADFW: consider `Service` + `about: Event` (you are not the event organiser).
-- [ ] Service schema: `serviceType` in normal case (not ALL CAPS).
-- [ ] BlogPosting: real author (name + bio page) or author = Organization; fix `wordCount`.
-- [ ] Special offers: `Product`/`Service` + `Offer` (price, currency, validFrom/validThrough).
-- [ ] Breadcrumb URLs: remove trailing slash (`/about/` → `/about`) to match canonicals.
+- [x] Service schema: `serviceType` in normal case (not ALL CAPS).
+- [x] BlogPosting: author = Organization unless a real author name is set; wrong `wordCount` removed.
+- [x] Special offers: `Service` + `Offer` (price, currency, validFrom/validThrough).
+- [x] Breadcrumb URLs: remove trailing slash (`/about/` → `/about`) to match canonicals.
 
 ### Content
-- [ ] Fix H1 typo on `/special-offers`: "journeys,ready" → "journeys, ready".
+- [x] Fix H1 typo on `/special-offers`: "journeys,ready" → "journeys, ready".
 - [ ] Expand service pages to 700–1,200 words each, with an answer-first intro and 5–8 FAQs:
   - [ ] events-productions (104 words)
   - [ ] management-training (127)
@@ -116,9 +118,10 @@ Decision: keep `/management-training` (it is a top-level menu item and `Service:
   - [ ] security-coordination (205)
   - [ ] planning-coordination (291) + add FAQ block
 - [ ] Blog post "Coordinating a Cross-Border Executive Forum" (100 words) → write the full article.
-- [ ] Merge `/blog` and `/insights` into one hub, 301 the other.
+- [x] Merge `/blog` and `/insights`: `/insights` 301 → `/blog`, menu + footer "Insights" → `/blog`, removed from sitemap.
 - [ ] About/Home: team (names, roles, LinkedIn), founding year, numbers (events, delegations, countries), named testimonials.
-- [ ] Contact page: phone, address, map.
+- [x] Contact page: phone (tel:) link + address links to Google Maps.
+- [ ] ⚠️ Contact form has `action="#"` — it does not send anything. Needs a controller + mail.
 - [ ] Publish 2 posts per month. Ideas:
   - [ ] How to organise a delegation for WEF Davos 2027
   - [ ] Hotels and meeting venues near the Davos Congress Centre
@@ -130,18 +133,19 @@ Decision: keep `/management-training` (it is a top-level menu item and `Service:
 
 ### Technical
 - [ ] Cache the LocalRydes API call on `/special-offers` (now 1.3 s).
-- [ ] nginx: add `Strict-Transport-Security` and a basic CSP.
+- [x] HSTS + Permissions-Policy via `AddSecurityHeaders` middleware.
+- [ ] CSP (needs testing with GTM, fonts, jsdelivr, image CDNs).
 - [ ] Public page cache (now `Cache-Control: no-cache, private`).
-- [ ] Cookie consent: Google Consent Mode, or GTM tags fire only after consent.
+- [x] Google Consent Mode v2: default denied, granted after "Accept" (layout + `main.js`).
 
 ---
 
 ## P3 — Low
 
 - [ ] Self-host OG images (now on Unsplash and on the `sob-summit` bucket folder — fix the typo for new uploads).
-- [ ] Remove the canonical tag from the 404 page.
-- [ ] Add `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">` to all public pages.
-- [ ] robots.txt: optional explicit `Allow` for GPTBot, OAI-SearchBot, PerplexityBot, ClaudeBot, Google-Extended.
+- [x] Remove the canonical tag from the 404 page (any `noindex` page has no canonical).
+- [x] Default robots meta on all public pages (`@section('robots')` to override).
+- [x] robots.txt: explicit `Allow` for AI bots.
 
 ---
 

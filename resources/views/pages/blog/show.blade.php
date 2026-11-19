@@ -13,7 +13,6 @@
     $modifiedIso   = optional($blog->updated_at ?: $blog->published_at)->toIso8601String();
 
     $plainBody     = trim(preg_replace('/\s+/', ' ', strip_tags((string) $blog->description)));
-    $wordCount     = $plainBody === '' ? 0 : str_word_count($plainBody);
 
     $keywordsList  = collect(explode(',', (string) $blog->seo_keywords))
         ->map(fn ($k) => trim($k))
@@ -23,8 +22,6 @@
     $authorName    = $blog->author ?: 'The SOV SUMMIT Desk';
     $category      = $blog->category ?: 'Insight';
     $orgName       = 'SOV SUMMIT';
-    $orgLogoUrl    = 'https://sov-summit.com/assets/img/logo.webp';
-    $siteBase      = rtrim(config('app.url', 'https://sov-summit.com'), '/');
 
     // --------- Structured data ---------
     $blogPostingLd = array_filter([
@@ -36,7 +33,6 @@
         'description'      => $seoSummary,
         'articleSection'   => $category,
         'keywords'         => $keywordsList->isNotEmpty() ? $keywordsList->implode(', ') : null,
-        'wordCount'        => $wordCount > 0 ? $wordCount : null,
         'inLanguage'       => 'en',
         'url'              => $canonical,
         'isFamilyFriendly' => true,
@@ -48,21 +44,11 @@
             'width'  => 1600,
             'height' => 900,
         ] : null,
-        'author' => [
-            '@type' => 'Person',
-            'name'  => $authorName,
-            'url'   => $siteBase . '/about',
-        ],
-        'publisher' => [
-            '@type' => 'Organization',
-            'name'  => $orgName,
-            'url'   => $siteBase,
-            'logo'  => [
-                '@type'  => 'ImageObject',
-                'url'    => $orgLogoUrl,
-                'width'  => 512,
-                'height' => 512,
-            ],
+        // A named author is a Person; the default desk byline is the organisation itself.
+        'author'    => $blog->author
+            ? ['@type' => 'Person', 'name' => $blog->author]
+            : \App\Support\Seo::organizationReference(),
+        'publisher' => \App\Support\Seo::organizationReference(),
         ],
     ], fn ($v) => !is_null($v));
 
@@ -78,13 +64,12 @@
 @endphp
 
 @section('title', $seoTitleFull)
-@section('meta_description', $seoSummary)
+@section('meta_description', \App\Support\Seo::description($seoSummary))
 @section('canonical', $canonical)
 @section('og_image', $coverUrl)
 
 @push('head')
 {{-- Discoverability --}}
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
 <meta name="author" content="{{ $authorName }}" />
 @if ($keywordsList->isNotEmpty())

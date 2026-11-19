@@ -1,12 +1,12 @@
 @extends('layouts.site')
 
 @section('title', 'About SOV SUMMIT | People, Ideas, Impact')
-@section('meta_description', 'Learn about SOV SUMMIT, an international coordination partner for events, delegations, management training, travel experiences, security coordination, and media coverage.')
+@section('meta_description', 'About SOV SUMMIT, the Zug-based coordination partner for international events, delegations, management training, travel, security and media coverage.')
 @section('canonical', 'https://sov-summit.com/about/')
 
 @push('head')
-<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "Organization", "name": "SOV SUMMIT", "legalName": "Sovereign Summit GmbH", "url": "https://sov-summit.com/", "logo": "https://sov-summit.com/assets/img/logo.webp", "email": "info@sov-summit.com", "address": {"@type": "PostalAddress", "streetAddress": "Bahnhofstrasse 21", "addressLocality": "Zug", "postalCode": "6300", "addressCountry": "CH"}, "slogan": "People. Ideas. Impact."}' !!}</script>
-<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "About", "item": "https://sov-summit.com/about/"}]}' !!}</script>
+@include('partials.schema-organization')
+<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "About", "item": "https://sov-summit.com/about"}]}' !!}</script>
 <script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is SOV SUMMIT?", "acceptedAnswer": {"@type": "Answer", "text": "SOV SUMMIT is an international coordination and event organisation company that connects clients with suitable providers for events, management training, delegations, travel experiences, security coordination, and media coverage."}}, {"@type": "Question", "name": "What services does SOV SUMMIT provide?", "acceptedAnswer": {"@type": "Answer", "text": "SOV SUMMIT provides planning and coordination, conference planning, delegation management, management training programme coordination, event production, security coordination, media coverage, and travel experience planning."}}, {"@type": "Question", "name": "Who does SOV SUMMIT work with?", "acceptedAnswer": {"@type": "Answer", "text": "SOV SUMMIT works with corporations, institutions, governments, associations, executive teams, family offices, private clients, event organisers, and production companies, depending on the programme and requirements."}}, {"@type": "Question", "name": "Where is SOV SUMMIT based?", "acceptedAnswer": {"@type": "Answer", "text": "SOV SUMMIT is the operating brand of Sovereign Summit GmbH, based in Zug, Switzerland."}}, {"@type": "Question", "name": "How can I contact SOV SUMMIT?", "acceptedAnswer": {"@type": "Answer", "text": "You can contact SOV SUMMIT by email at info@sov-summit.com or by WhatsApp at +41 71 539 23 00."}}]}' !!}</script>
 @endpush
 
@@ -17,8 +17,8 @@
 @section('content')
 <section class=""><div class="container">
 <div class="section-head wide">
-  <p class="brandline">ABOUT SOV SUMMIT</p>
-  <h1>People. Ideas. Impact.</h1>
+  <p class="brandline">PEOPLE. IDEAS. IMPACT.</p>
+  <h1>About SOV SUMMIT: international event and delegation coordination</h1>
   <p class="lede">SOV SUMMIT was created around a simple principle: successful programmes depend on the quality of the connections behind them.</p>
 </div>
 <div class="split">

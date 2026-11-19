@@ -8,12 +8,16 @@
     $canonicalUrl = \App\Support\Seo::canonical($sectionValue('canonical') ?: null);
     $customOgImage = $sectionValue('og_image');
     $ogImage = \App\Support\Seo::imageUrl($customOgImage ?: null);
+    $robots = $sectionValue('robots') ?: 'index, follow, max-image-preview:large, max-snippet:-1';
+    $isNoindex = str_contains($robots, 'noindex');
 @endphp
-<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{{ $pageTitle }}</title>
 <meta name="description" content="{{ $pageDescription }}" />
+<meta name="robots" content="{{ $robots }}" />
+@unless ($isNoindex)
 <link rel="canonical" href="{{ $canonicalUrl }}" />
+@endunless
 <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any" />
 <link rel="icon" type="image/svg+xml" href="{{ asset('assets/img/logo/favicon.svg') }}" />
 <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/img/logo/favicon-32.png') }}" />

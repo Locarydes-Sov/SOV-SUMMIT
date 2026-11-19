@@ -28,7 +28,6 @@ class JsonLdSchemaTest extends TestCase
             'products' => ['/products'],
             'events' => ['/events'],
             'blog' => ['/blog'],
-            'insights' => ['/insights'],
             'contact' => ['/contact'],
             'faq' => ['/faq'],
             'legal notice' => ['/legal-notice'],

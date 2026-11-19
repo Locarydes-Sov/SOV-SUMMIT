@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AddSecurityHeaders;
 use App\Http\Middleware\RedirectToCanonicalHost;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,6 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*');
         $middleware->web(prepend: [
             RedirectToCanonicalHost::class,
+        ]);
+        $middleware->web(append: [
+            AddSecurityHeaders::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

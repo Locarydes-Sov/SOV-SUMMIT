@@ -60,4 +60,130 @@ class Seo
 
         return $title.' | '.self::SITE_NAME;
     }
+
+    /**
+     * Stable id of the organisation, so other schema blocks can point to it.
+     */
+    public static function organizationId(): string
+    {
+        return self::baseUrl().'/#organization';
+    }
+
+    /**
+     * Filled brand profile URLs (LinkedIn, Crunchbase, …) for the schema "sameAs" list.
+     *
+     * @return array<int, string>
+     */
+    public static function sameAs(): array
+    {
+        return array_values(array_filter((array) config('seo.profiles', []), fn ($url): bool => is_string($url) && $url !== ''));
+    }
+
+    /**
+     * Footer social links that have a URL set.
+     *
+     * @return array<string, string>
+     */
+    public static function socialLinks(): array
+    {
+        $profiles = (array) config('seo.profiles', []);
+
+        return collect((array) config('seo.footer_social', []))
+            ->mapWithKeys(fn (string $network): array => [$network => (string) ($profiles[$network] ?? '')])
+            ->filter()
+            ->all();
+    }
+
+    /**
+     * Full Organization schema, shared by every page.
+     *
+     * @return array<string, mixed>
+     */
+    public static function organization(): array
+    {
+        $org = (array) config('seo.organization', []);
+        $address = (array) ($org['address'] ?? []);
+
+        return array_filter([
+            '@context' => 'https://schema.org',
+            '@type' => 'Organization',
+            '@id' => self::organizationId(),
+            'name' => $org['name'] ?? self::SITE_NAME,
+            'legalName' => $org['legal_name'] ?? null,
+            'url' => self::baseUrl().'/',
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => self::baseUrl().'/'.ltrim((string) ($org['logo'] ?? ''), '/'),
+            ],
+            'email' => $org['email'] ?? null,
+            'telephone' => $org['telephone'] ?? null,
+            'foundingDate' => $org['founding_date'] ?? null,
+            'slogan' => $org['slogan'] ?? null,
+            'areaServed' => $org['area_served'] ?? null,
+            'address' => [
+                '@type' => 'PostalAddress',
+                'streetAddress' => $address['street'] ?? null,
+                'addressLocality' => $address['locality'] ?? null,
+                'postalCode' => $address['postal_code'] ?? null,
+                'addressCountry' => $address['country'] ?? null,
+            ],
+            'contactPoint' => [
+                '@type' => 'ContactPoint',
+                'contactType' => 'customer service',
+                'email' => $org['email'] ?? null,
+                'telephone' => $org['telephone'] ?? null,
+                'areaServed' => $org['area_served'] ?? null,
+                'availableLanguage' => ['English'],
+            ],
+            'sameAs' => self::sameAs() ?: null,
+        ], fn ($value): bool => $value !== null && $value !== '');
+    }
+
+    /**
+     * Short reference to the organisation for use inside other schema (organizer, provider, publisher).
+     *
+     * @return array<string, mixed>
+     */
+    public static function organizationReference(): array
+    {
+        $org = (array) config('seo.organization', []);
+
+        return [
+            '@type' => 'Organization',
+            '@id' => self::organizationId(),
+            'name' => $org['name'] ?? self::SITE_NAME,
+            'url' => self::baseUrl().'/',
+            'logo' => [
+                '@type' => 'ImageObject',
+                'url' => self::baseUrl().'/'.ltrim((string) ($org['logo'] ?? ''), '/'),
+            ],
+        ];
+    }
+
+    /**
+     * Print a schema array as a JSON-LD script tag body.
+     *
+     * @param  array<string, mixed>  $schema
+     */
+    public static function jsonLd(array $schema): string
+    {
+        return (string) json_encode($schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG);
+    }
+
+    /**
+     * Meta description of at most $limit characters, cut at a word boundary.
+     */
+    public static function description(string $text, int $limit = 160): string
+    {
+        $text = trim(preg_replace('/\s+/u', ' ', $text) ?? $text);
+
+        if (mb_strlen($text) <= $limit) {
+            return $text;
+        }
+
+        $cut = mb_substr($text, 0, $limit - 1);
+        $lastSpace = mb_strrpos($cut, ' ');
+
+        return rtrim(mb_substr($cut, 0, $lastSpace ?: mb_strlen($cut)), " ,;:.-").'…';
+    }
 }

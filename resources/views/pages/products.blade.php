@@ -1,12 +1,12 @@
 @extends('layouts.site')
 
-@section('title', 'Solutions | SOV SUMMIT')
+@section('title', 'Attending Management & Event App | SOV SUMMIT')
 @section('meta_description', 'Digital products by SOV SUMMIT — Attending Management and Event App — designed to streamline delegate coordination, registrations, communications, and on-site experience.')
 @section('canonical', 'https://sov-summit.com/products/')
 
 @push('head')
-<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "Organization", "name": "SOV SUMMIT", "legalName": "Sovereign Summit GmbH", "url": "https://sov-summit.com/", "logo": "https://sov-summit.com/assets/img/logo.webp", "email": "info@sov-summit.com", "address": {"@type": "PostalAddress", "streetAddress": "Bahnhofstrasse 21", "addressLocality": "Zug", "postalCode": "6300", "addressCountry": "CH"}, "slogan": "People. Ideas. Impact."}' !!}</script>
-<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "Products", "item": "https://sov-summit.com/products/"}]}' !!}</script>
+@include('partials.schema-organization')
+<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "Products", "item": "https://sov-summit.com/products"}]}' !!}</script>
 @endpush
 
 @section('breadcrumb')

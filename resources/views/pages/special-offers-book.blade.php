@@ -22,11 +22,11 @@
 @endphp
 
 @section('title', 'Book: '.$title.' | SOV SUMMIT')
+@section('robots', 'noindex, follow')
 @section('meta_description', 'Book '.$title.' — a curated special offer arranged by SOV SUMMIT.')
 @section('canonical', route('special-offers.book', $uuid))
 
 @push('head')
-<meta name="robots" content="noindex, follow" />
 @endpush
 
 @section('content')

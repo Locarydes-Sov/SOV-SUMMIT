@@ -68,6 +68,34 @@
         ['@type' => 'ListItem', 'position' => 3, 'name' => $title, 'item' => $canonical],
     ],
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) !!}</script>
+@php
+    $schemaPrice = (float) data_get($offer, 'price', 0);
+    $schemaDiscount = (float) data_get($offer, 'discount', 0);
+    $schemaDiscountAmount = $schemaDiscount > 0 ? (data_get($offer, 'discountType') !== 'fixed' ? $schemaPrice * $schemaDiscount / 100 : $schemaDiscount) : 0;
+    $schemaFinalPrice = max(0, round($schemaPrice - $schemaDiscountAmount, 2));
+    $schemaCurrency = data_get($offer, 'sourceCurrency.isoCode');
+    $offerLd = array_filter([
+        '@context' => 'https://schema.org',
+        '@type' => 'Service',
+        'name' => $title,
+        'description' => $summary ?: null,
+        'url' => $canonical,
+        'image' => $cover ?: null,
+        'category' => $category ?: null,
+        'areaServed' => $location ?: null,
+        'provider' => \App\Support\Seo::organizationReference(),
+        'offers' => ($schemaCurrency && $schemaFinalPrice > 0) ? array_filter([
+            '@type' => 'Offer',
+            'price' => number_format($schemaFinalPrice, 2, '.', ''),
+            'priceCurrency' => $schemaCurrency,
+            'url' => $canonical,
+            'availability' => $isBookable ? 'https://schema.org/InStock' : 'https://schema.org/SoldOut',
+            'validFrom' => data_get($offer, 'startDate') ? Carbon::parse(data_get($offer, 'startDate'))->toDateString() : null,
+            'validThrough' => $endDate?->toDateString(),
+        ]) : null,
+    ], fn ($value) => $value !== null);
+@endphp
+<script type="application/ld+json">{!! \App\Support\Seo::jsonLd($offerLd) !!}</script>
 @endpush
 
 @section('content')

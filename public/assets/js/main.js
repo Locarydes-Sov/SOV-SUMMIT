@@ -141,6 +141,9 @@ function initCookieBanner() {
             if (!target) return;
             var action = target.getAttribute("data-cookie-action");
             if (action === "accept" || action === "decline") writeConsent(action);
+            if (action === "accept" && typeof window.gtag === "function") {
+                window.gtag("consent", "update", { ad_storage: "granted", ad_user_data: "granted", ad_personalization: "granted", analytics_storage: "granted" });
+            }
             hideBanner();
             showToggle();
         });

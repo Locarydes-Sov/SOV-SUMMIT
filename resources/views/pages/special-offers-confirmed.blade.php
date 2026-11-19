@@ -21,10 +21,10 @@
 @endphp
 
 @section('title', 'Booking received | SOV SUMMIT')
+@section('robots', 'noindex, nofollow')
 @section('meta_description', 'Your booking request has been received.')
 
 @push('head')
-<meta name="robots" content="noindex, nofollow" />
 @endpush
 
 @section('content')

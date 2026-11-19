@@ -12,8 +12,8 @@
     $heroImage = collect($offers)->map(fn (array $offer) => data_get($offer, 'thumbnail'))->filter()->first();
 @endphp
 
-@section('title', ($search !== '' ? 'Search: '.$search.' | ' : '').'Special Offers | SOV SUMMIT')
-@section('meta_description', 'Curated travel packages, tours and chauffeured journeys with set itineraries, arranged by SOV SUMMIT.')
+@section('title', ($search !== '' ? 'Search: '.$search.' | ' : '').'Special Offers: Chauffeur Tours & Travel Packages | SOV SUMMIT')
+@section('meta_description', 'Book curated chauffeur tours, event transfers and travel packages with set itineraries and prices, from WEF Davos to MWC Barcelona, arranged by SOV SUMMIT.')
 @section('canonical', route('special-offers.index'))
 
 @section('content')
@@ -28,7 +28,7 @@
       <a href="/">Home</a><span aria-hidden="true">/</span><span aria-current="page">Special Offers</span>
     </nav>
     <p class="so-eyebrow">Special Offers</p>
-    <h1 class="so-list-hero__title">Curated journeys,<br><em>ready to book.</em></h1>
+    <h1 class="so-list-hero__title">Curated journeys, <br><em>ready to book.</em></h1>
     <p class="so-list-hero__lede">Private city tours, event chauffeur packages and multi-day journeys &mdash; fixed price, set itinerary, arranged for delegations, guests and private clients.</p>
 
     <form class="so-search" method="GET" action="{{ route('special-offers.index') }}" role="search" data-so-search>

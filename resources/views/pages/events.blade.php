@@ -1,12 +1,12 @@
 @extends('layouts.site')
 
-@section('title', 'Events | SOV SUMMIT')
+@section('title', 'Executive Events & Delegation Programmes | SOV SUMMIT')
 @section('meta_description', 'Selected events coordinated by SOV SUMMIT — conferences, executive programmes, delegation dinners, private journeys, and international productions.')
 @section('canonical', url()->current())
 
 @push('head')
-<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "Organization", "name": "SOV SUMMIT", "legalName": "Sovereign Summit GmbH", "url": "https://sov-summit.com/", "logo": "https://sov-summit.com/assets/img/logo.webp", "email": "info@sov-summit.com", "address": {"@type": "PostalAddress", "streetAddress": "Bahnhofstrasse 21", "addressLocality": "Zug", "postalCode": "6300", "addressCountry": "CH"}, "slogan": "People. Ideas. Impact."}' !!}</script>
-<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "Events", "item": "https://sov-summit.com/events/"}]}' !!}</script>
+@include('partials.schema-organization')
+<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "Events", "item": "https://sov-summit.com/events"}]}' !!}</script>
 @endpush
 
 @section('breadcrumb')
