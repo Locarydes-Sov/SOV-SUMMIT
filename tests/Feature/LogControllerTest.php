@@ -190,4 +190,51 @@ class LogControllerTest extends TestCase
             ->assertDontSee('View .env')
             ->assertDontSee('id="env-modal"', false);
     }
+
+    public function test_admin_can_delete_one_log_file(): void
+    {
+        File::put($this->logDirectory.'/laravel.log', "[2026-11-19 10:00:00] local.ERROR: Old error\n");
+        File::put($this->logDirectory.'/localrydes-2026-11-16.log', "[2026-11-16 10:00:00] local.ERROR: Key missing\n");
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->delete(route('admin.logs.destroy'), ['file' => 'laravel.log'])
+            ->assertRedirect(route('admin.logs.index'))
+            ->assertSessionHas('status', 'Deleted log file laravel.log.');
+
+        $this->assertFileDoesNotExist($this->logDirectory.'/laravel.log');
+        $this->assertFileExists($this->logDirectory.'/localrydes-2026-11-16.log');
+    }
+
+    public function test_admin_can_delete_all_log_files(): void
+    {
+        File::put($this->logDirectory.'/laravel.log', "[2026-11-19 10:00:00] local.ERROR: Old error\n");
+        File::put($this->logDirectory.'/localrydes-2026-11-16.log', "[2026-11-16 10:00:00] local.ERROR: Key missing\n");
+        File::put($this->logDirectory.'/keep.txt', 'not a log');
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->delete(route('admin.logs.destroy'))
+            ->assertSessionHas('status', 'Deleted 2 log file(s).');
+
+        $this->assertFileDoesNotExist($this->logDirectory.'/laravel.log');
+        $this->assertFileDoesNotExist($this->logDirectory.'/localrydes-2026-11-16.log');
+        $this->assertFileExists($this->logDirectory.'/keep.txt');
+    }
+
+    public function test_delete_rejects_files_outside_the_logs_folder(): void
+    {
+        $this->actingAs(User::factory()->admin()->create())
+            ->delete(route('admin.logs.destroy'), ['file' => '../.env'])
+            ->assertNotFound();
+    }
+
+    public function test_non_admin_cannot_delete_logs(): void
+    {
+        File::put($this->logDirectory.'/laravel.log', "[2026-11-19 10:00:00] local.ERROR: Old error\n");
+
+        $this->actingAs(User::factory()->create())
+            ->delete(route('admin.logs.destroy'), ['file' => 'laravel.log'])
+            ->assertForbidden();
+
+        $this->assertFileExists($this->logDirectory.'/laravel.log');
+    }
 }

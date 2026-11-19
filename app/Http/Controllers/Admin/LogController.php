@@ -63,7 +63,30 @@ class LogController extends Controller
             'configCached' => app()->configurationIsCached(),
             'environment' => app()->environment(),
             'envLines' => $request->user()?->isAdmin() ? $this->env->lines() : null,
+            'canDeleteLogs' => (bool) $request->user()?->isAdmin(),
         ]);
+    }
+
+    /**
+     * Delete the chosen log file, or all log files when no file is chosen. Admins only.
+     */
+    public function destroy(Request $request): RedirectResponse
+    {
+        abort_unless($request->user()?->isAdmin(), 403);
+
+        $file = (string) $request->input('file', '');
+
+        if ($file === '') {
+            $deleted = $this->reader->deleteAll();
+
+            return redirect()->route('admin.logs.index')->with('status', "Deleted {$deleted} log file(s).");
+        }
+
+        abort_unless($this->reader->isAllowed($file), 404);
+
+        $this->reader->delete($file);
+
+        return redirect()->route('admin.logs.index')->with('status', "Deleted log file {$file}.");
     }
 
     public function testConnection(): RedirectResponse

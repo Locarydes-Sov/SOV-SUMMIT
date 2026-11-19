@@ -18,6 +18,17 @@
                 View .env
             </button>
         @endif
+        @if ($canDeleteLogs && $files->isNotEmpty())
+            <form method="POST" action="{{ route('admin.logs.destroy') }}"
+                  onsubmit="return confirm(@js($file !== '' ? 'Delete log file '.$file.'? This cannot be undone.' : 'Delete ALL '.$files->count().' log files? This cannot be undone.'))">
+                @csrf
+                @method('DELETE')
+                <input type="hidden" name="file" value="{{ $file }}">
+                <button type="submit" class="inline-flex items-center gap-2 px-3.5 py-2 border border-red-300 bg-white hover:bg-red-50 text-red-700 text-sm font-semibold rounded-md">
+                    {{ $file !== '' ? 'Delete this log' : 'Delete all logs' }}
+                </button>
+            </form>
+        @endif
         <form method="POST" action="{{ route('admin.logs.localrydes.clear-cache') }}">
             @csrf
             <button type="submit" class="inline-flex items-center gap-2 px-3.5 py-2 border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 text-sm font-semibold rounded-md">

@@ -49,6 +49,28 @@ class LogFileReader
     }
 
     /**
+     * Delete one log file. Only allowed "*.log" files inside the logs folder can be deleted.
+     */
+    public function delete(string $filename): bool
+    {
+        if (! $this->isAllowed($filename)) {
+            return false;
+        }
+
+        return File::delete($this->directory.DIRECTORY_SEPARATOR.$filename);
+    }
+
+    /**
+     * Delete every log file. Returns how many files were deleted.
+     */
+    public function deleteAll(): int
+    {
+        return $this->files()
+            ->filter(fn (array $file): bool => $this->delete($file['name']))
+            ->count();
+    }
+
+    /**
      * Parse the entries of one log file, newest first.
      *
      * Large files are read from the end, so only the most recent part is parsed.

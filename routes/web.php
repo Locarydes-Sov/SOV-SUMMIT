@@ -106,6 +106,7 @@ Route::middleware('auth')->group(function () {
             ->except(['show']);
 
         Route::get('logs', [LogController::class, 'index'])->name('logs.index');
+        Route::delete('logs', [LogController::class, 'destroy'])->name('logs.destroy');
         Route::post('logs/localrydes/test-connection', [LogController::class, 'testConnection'])->name('logs.localrydes.test-connection');
         Route::post('logs/localrydes/clear-cache', [LogController::class, 'clearCache'])->name('logs.localrydes.clear-cache');
 
