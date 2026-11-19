@@ -69,7 +69,7 @@ class SpecialOfferTest extends TestCase
             ->assertSee('Vienna City Tour')
             ->assertSee('€400.00')
             ->assertSee('<s class="offer-price__old">€450.00</s>', false)
-            ->assertSee(route('special-offers.show', '9d1a2b3c-uuid'));
+            ->assertSee(route('special-offers.show', ['uuid' => '9d1a2b3c-uuid', 'slug' => 'vienna-city-tour']));
 
         Http::assertSent(fn (Request $request): bool => $request->hasHeader('x-api-key', 'test-key')
             && $request['search_key'] === 'vienna'
@@ -119,7 +119,7 @@ class SpecialOfferTest extends TestCase
             ]),
         ]);
 
-        $this->get(route('special-offers.show', '9d1a2b3c-uuid'))
+        $this->get(route('special-offers.show', ['uuid' => '9d1a2b3c-uuid', 'slug' => 'vienna-city-tour']))
             ->assertOk()
             ->assertSee('Vienna City Tour')
             ->assertSee('Day 1: Schönbrunn')
@@ -144,13 +144,28 @@ class SpecialOfferTest extends TestCase
             self::BASE_URL.'/special-offers?*' => Http::response(['success' => true, 'data' => ['specialOffers' => []]]),
         ]);
 
-        $html = $this->get(route('special-offers.show', '9d1a2b3c-uuid'))
+        $html = $this->get(route('special-offers.show', ['uuid' => '9d1a2b3c-uuid', 'slug' => 'vienna-city-tour']))
             ->assertOk()
             ->assertSee('<p>Intro</p><ul><li>Loose item</li></ul>', false)
             ->getContent();
 
         $this->assertSame(2, substr_count($html, '<details'));
         $this->assertSame(2, substr_count($html, '</details>'));
+    }
+
+    public function test_show_without_slug_redirects_permanently_to_the_readable_url(): void
+    {
+        Http::fake([
+            self::BASE_URL.'/special-offers/9d1a2b3c-uuid' => Http::response(['success' => true, 'data' => ['specialOffer' => $this->offer()]]),
+        ]);
+
+        $this->get('/special-offers/9d1a2b3c-uuid')
+            ->assertStatus(301)
+            ->assertRedirect(route('special-offers.show', ['uuid' => '9d1a2b3c-uuid', 'slug' => 'vienna-city-tour']));
+
+        $this->get('/special-offers/9d1a2b3c-uuid/old-title')
+            ->assertStatus(301)
+            ->assertRedirect(route('special-offers.show', ['uuid' => '9d1a2b3c-uuid', 'slug' => 'vienna-city-tour']));
     }
 
     public function test_show_returns_404_when_offer_not_found(): void

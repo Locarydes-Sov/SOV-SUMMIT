@@ -17,6 +17,22 @@ class ServiceController extends Controller
     {
         abort_unless($service->is_published, 404);
 
+        if ($service->slug === 'management-training') {
+            return redirect()->to($service->publicUrl(), 301);
+        }
+
+        return $this->render($service);
+    }
+
+    public function managementTraining()
+    {
+        $service = Service::published()->where('slug', 'management-training')->firstOrFail();
+
+        return $this->render($service);
+    }
+
+    private function render(Service $service)
+    {
         $related = Service::published()
             ->where('id', '!=', $service->id)
             ->ordered()
@@ -24,12 +40,5 @@ class ServiceController extends Controller
             ->get();
 
         return view('pages.services.show', compact('service', 'related'));
-    }
-
-    public function managementTraining()
-    {
-        $service = Service::published()->where('slug', 'management-training')->firstOrFail();
-
-        return $this->show($service);
     }
 }

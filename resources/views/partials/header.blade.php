@@ -16,14 +16,13 @@
         ['label' => 'Security Coordination',    'href' => '/services/security-coordination'],
         ['label' => 'Media Coverage',           'href' => '/services/media-coverage'],
         ['label' => 'Travel',                   'href' => '/services/travel-experiences'],
-        ['label' => 'Training',                 'href' => '/management-training'],
+        ['label' => 'Management Training',      'href' => '/management-training'],
     ];
     $tailItems = [
         ['label' => 'Solutions', 'href' => '/products',                    'match' => 'products*'],
-        ['label' => 'Training', 'href' => '/management-training',          'match' => 'management-training*'],
+        ['label' => 'Management Training', 'href' => '/management-training',          'match' => 'management-training*'],
         ['label' => 'Events',   'href' => '/events',                       'match' => 'events*'],
         ['label' => 'Offers',   'href' => '/special-offers',               'match' => 'special-offers*'],
-        ['label' => 'Travel',   'href' => '/services/travel-experiences',  'match' => 'services/travel-experiences*'],
         ['label' => 'Insights', 'href' => '/insights',                     'match' => 'insights*'],
     ];
 @endphp

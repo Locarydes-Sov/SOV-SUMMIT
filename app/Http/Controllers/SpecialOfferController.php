@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\Localrydes\SpecialOfferApiException;
 use App\Services\Localrydes\SpecialOfferClient;
+use App\Support\SpecialOfferUrl;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -38,7 +40,7 @@ class SpecialOfferController extends Controller
         return view('pages.special-offers', compact('offers', 'search', 'page', 'hasMore', 'apiError'));
     }
 
-    public function show(string $uuid): View
+    public function show(string $uuid, ?string $slug = null): View|RedirectResponse
     {
         try {
             $offer = $this->client->find($uuid);
@@ -47,6 +49,12 @@ class SpecialOfferController extends Controller
         }
 
         abort_if($offer === null, 404);
+
+        $expectedSlug = SpecialOfferUrl::slug($offer);
+
+        if ($expectedSlug !== '' && $slug !== $expectedSlug) {
+            return redirect()->to(SpecialOfferUrl::for($offer), 301);
+        }
 
         $relatedOffers = [];
 

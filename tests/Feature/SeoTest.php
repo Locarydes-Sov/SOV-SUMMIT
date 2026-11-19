@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\Event;
+use App\Models\Service;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class SeoTest extends TestCase
@@ -49,6 +51,8 @@ class SeoTest extends TestCase
 
     public function test_sitemap_lists_static_pages_and_published_events_only(): void
     {
+        Http::fake(['*' => Http::response(['success' => true, 'data' => ['specialOffers' => []]])]);
+
         $published = Event::factory()->create(['is_published' => true]);
         $draft = Event::factory()->create(['is_published' => false]);
 
@@ -66,5 +70,54 @@ class SeoTest extends TestCase
         $this->get('https://www.sov-summit.com/events?page=2')
             ->assertStatus(301)
             ->assertRedirect('https://sov-summit.com/events?page=2');
+    }
+
+    public function test_sitemap_lists_management_training_once_and_special_offers_with_readable_urls(): void
+    {
+        config()->set('services.localrydes', [
+            'base_url' => 'https://api.test/api/v2/external',
+            'key' => 'test-key',
+            'timeout' => 5,
+            'verify_ssl' => true,
+            'cache_ttl' => 0,
+        ]);
+
+        Http::fake([
+            'https://api.test/api/v2/external/special-offers*' => Http::response(['success' => true, 'data' => ['specialOffers' => [
+                ['uuid' => 'abc-123', 'title' => 'WEF Davos 2027 V-Class Chauffeur'],
+            ]]]),
+        ]);
+
+        Service::factory()->managementTraining()->create();
+        $service = Service::factory()->create();
+        $event = Event::factory()->create(['is_published' => true]);
+
+        $xml = $this->get('/sitemap.xml')->assertOk()->getContent();
+
+        $this->assertSame(1, substr_count($xml, '<loc>https://sov-summit.com/management-training</loc>'));
+        $this->assertStringNotContainsString('/services/management-training', $xml);
+        $this->assertStringContainsString('<loc>https://sov-summit.com/services/'.$service->slug.'</loc>', $xml);
+        $this->assertStringContainsString('<loc>https://sov-summit.com/special-offers/abc-123/wef-davos-2027-v-class-chauffeur</loc>', $xml);
+        $this->assertStringContainsString('<lastmod>'.$event->updated_at->toAtomString().'</lastmod>', $xml);
+    }
+
+    public function test_sitemap_still_works_when_special_offers_api_is_down(): void
+    {
+        Http::fake(['*' => Http::response(['success' => false], 500)]);
+
+        $this->get('/sitemap.xml')
+            ->assertOk()
+            ->assertSee('<loc>https://sov-summit.com/contact</loc>', false);
+    }
+
+    public function test_services_management_training_redirects_permanently_to_the_main_url(): void
+    {
+        Service::factory()->managementTraining()->create();
+
+        $this->get('/services/management-training')
+            ->assertStatus(301)
+            ->assertRedirect(url('/management-training'));
+
+        $this->get('/management-training')->assertOk();
     }
 }

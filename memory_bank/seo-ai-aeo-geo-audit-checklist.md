@@ -54,19 +54,22 @@ Schema on events, services and blog shows `https://dev.sov-summit.com`.
 - [ ] Password-protect `dev.sov-summit.com` or send `X-Robots-Tag: noindex` from nginx.
 
 ### 4. Remove duplicate Management Training page
-- [ ] Keep `/services/management-training`.
-- [ ] 301 redirect `/management-training` → `/services/management-training` (`routes/web.php` line ~45).
-- [ ] Update menu link (`partials/header.blade.php`).
-- [ ] Remove `/management-training` from `SitemapController::STATIC_PAGES`.
+Decision: keep `/management-training` (it is a top-level menu item and `Service::publicUrl()` already uses it).
+
+- [x] 301 redirect `/services/management-training` → `/management-training` (`ServiceController::show`).
+- [x] Menu, footer and home links already use `/management-training` (no change needed).
+- [x] Sitemap lists it once, as `/management-training` (services now use `publicUrl()`).
+- [x] Tests: `SeoTest` (redirect + sitemap).
 
 ---
 
 ## P1 — High
 
 ### Sitemap & URLs
-- [ ] Add special-offer pages to `SitemapController`.
-- [ ] Use readable slugs for special offers (e.g. `/special-offers/wef-davos-2027-v-class-chauffeur`), 301 old UUID URLs.
-- [ ] Add `lastmod` for static pages.
+- [x] Add special-offer pages to `SitemapController` (from the LocalRydes API, up to 500; sitemap still works if the API is down).
+- [x] Readable special-offer URLs: `/special-offers/{uuid}/{title-slug}` (`App\Support\SpecialOfferUrl`). Old UUID-only URLs and wrong slugs 301 to the new URL.
+- [x] `lastmod` for listing pages: `/`, `/events`, `/services`, `/blog` (from the newest published record). Pure static pages have no lastmod on purpose.
+- [x] Tests: `SeoTest`, `SpecialOfferTest`. New `ServiceFactory`.
 
 ### Brand entity (for AI search)
 - [ ] One shared Organization schema with `sameAs`, `telephone` (+41 71 539 23 00), `contactPoint`, `foundingDate`, `areaServed`, `logo` as ImageObject, `@id`.

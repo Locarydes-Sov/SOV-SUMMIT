@@ -35,7 +35,7 @@
     <nav class="so-crumbs so-crumbs--dark" aria-label="Breadcrumb">
       <a href="/">Home</a><span aria-hidden="true">/</span>
       <a href="{{ route('special-offers.index') }}">Special Offers</a><span aria-hidden="true">/</span>
-      <a href="{{ route('special-offers.show', $uuid) }}">{{ Str::limit($title, 32) }}</a><span aria-hidden="true">/</span>
+      <a href="{{ \App\Support\SpecialOfferUrl::forUuid($uuid, $title) }}">{{ Str::limit($title, 32) }}</a><span aria-hidden="true">/</span>
       <span aria-current="page">Book</span>
     </nav>
 
@@ -174,7 +174,7 @@
               @include('partials.offer-price', ['offer' => $offer])
             </div>
           </div>
-          <a class="so-link-btn so-summary__back" href="{{ route('special-offers.show', $uuid) }}">&larr; Back to offer details</a>
+          <a class="so-link-btn so-summary__back" href="{{ \App\Support\SpecialOfferUrl::forUuid($uuid, $title) }}">&larr; Back to offer details</a>
         </aside>
       </div>
     @endif

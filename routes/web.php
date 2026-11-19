@@ -54,11 +54,11 @@ Route::get('/events', [EventController::class, 'index'])->name('events.index');
 Route::get('/events/{event:slug}', [EventController::class, 'show'])->name('events.show');
 Route::get('/special-offers', [SpecialOfferController::class, 'index'])->name('special-offers.index');
 Route::get('/special-offers/booking/confirmed', [SpecialOfferBookingController::class, 'confirmed'])->name('special-offers.booking.confirmed');
-Route::get('/special-offers/{uuid}', [SpecialOfferController::class, 'show'])->name('special-offers.show');
 Route::get('/special-offers/{uuid}/book', [SpecialOfferBookingController::class, 'create'])->name('special-offers.book');
 Route::post('/special-offers/{uuid}/book', [SpecialOfferBookingController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('special-offers.book.store');
+Route::get('/special-offers/{uuid}/{slug?}', [SpecialOfferController::class, 'show'])->name('special-offers.show');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{blog:slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::view('/insights', 'pages.insights');

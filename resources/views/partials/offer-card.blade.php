@@ -6,7 +6,7 @@
     $duration = (int) data_get($offer, 'duration', 0);
     $unit = data_get($offer, 'durationUnit') === 'hourly' ? 'hour' : 'day';
 @endphp
-<a class="event-card offer-card" href="{{ route('special-offers.show', data_get($offer, 'uuid')) }}" aria-label="{{ data_get($offer, 'title') }}">
+<a class="event-card offer-card" href="{{ \App\Support\SpecialOfferUrl::for($offer) }}" aria-label="{{ data_get($offer, 'title') }}">
   <div class="event-card__media {{ $cover ? '' : 'event-card__media--empty' }}">
     @if ($cover)
       <img src="{{ $cover }}" alt="{{ data_get($offer, 'title') }}{{ $city ? ' — '.$city : '' }}" loading="lazy" width="800" height="600">
