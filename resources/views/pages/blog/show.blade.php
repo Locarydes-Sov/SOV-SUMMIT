@@ -49,7 +49,6 @@
             ? ['@type' => 'Person', 'name' => $blog->author]
             : \App\Support\Seo::organizationReference(),
         'publisher' => \App\Support\Seo::organizationReference(),
-        ],
     ], fn ($v) => !is_null($v));
 
     $breadcrumbLd = [

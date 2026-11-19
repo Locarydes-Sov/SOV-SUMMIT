@@ -48,8 +48,8 @@
     ];
 @endphp
 
-@section('title', $title.' | Special Offers | SOV SUMMIT')
-@section('meta_description', Str::limit($summary ?: 'A curated special offer arranged by SOV SUMMIT.', 160))
+@section('title', \App\Support\Seo::title($title))
+@section('meta_description', \App\Support\Seo::description($summary ?: 'A curated special offer arranged by SOV SUMMIT.'))
 @section('canonical', $canonical)
 @if ($cover)
 @section('og_image', $cover)
