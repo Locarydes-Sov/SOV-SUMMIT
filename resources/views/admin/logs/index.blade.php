@@ -13,6 +13,11 @@
 @endphp
 <x-admin-layout title="Logs" subtitle="All application logs from storage/logs">
     <x-slot name="actions">
+        @if ($envLines !== null)
+            <button type="button" onclick="document.getElementById('env-modal').showModal()" class="inline-flex items-center gap-2 px-3.5 py-2 border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 text-sm font-semibold rounded-md">
+                View .env
+            </button>
+        @endif
         <form method="POST" action="{{ route('admin.logs.localrydes.clear-cache') }}">
             @csrf
             <button type="submit" class="inline-flex items-center gap-2 px-3.5 py-2 border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 text-sm font-semibold rounded-md">
@@ -134,4 +139,35 @@
     <div class="mt-4">
         {{ $entries->links() }}
     </div>
+    @if ($envLines !== null)
+        <dialog id="env-modal" class="w-full max-w-3xl rounded-lg border border-slate-200 p-0 shadow-xl backdrop:bg-slate-900/50">
+            <div class="flex items-center justify-between border-b border-slate-200 px-5 py-3">
+                <div>
+                    <h2 class="text-base font-semibold text-slate-900">.env file</h2>
+                    <p class="text-xs text-slate-500">Read-only. Passwords, keys, tokens and secrets are masked.</p>
+                </div>
+                <button type="button" onclick="document.getElementById('env-modal').close()" class="rounded-md px-2 py-1 text-xl leading-none text-slate-500 hover:bg-slate-100 hover:text-slate-900" aria-label="Close">&times;</button>
+            </div>
+            <div class="max-h-[70vh] overflow-auto bg-slate-950 px-5 py-4">
+                @if (count($envLines) === 0)
+                    <p class="text-sm text-red-300">No .env file found.</p>
+                @else
+                    <div class="font-mono text-xs leading-6 text-slate-200">
+                        @foreach ($envLines as $line)
+                            @if ($line['type'] === 'blank')
+                                <div>&nbsp;</div>
+                            @elseif ($line['type'] === 'comment')
+                                <div class="whitespace-pre-wrap break-all text-slate-500">{{ $line['text'] }}</div>
+                            @else
+                                <div class="whitespace-pre-wrap break-all"><span class="text-sky-300">{{ $line['key'] }}</span><span class="text-slate-500">=</span><span class="{{ $line['masked'] ? 'text-amber-300' : 'text-emerald-300' }}">{{ $line['value'] }}</span></div>
+                            @endif
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+            <div class="flex justify-end border-t border-slate-200 px-5 py-3">
+                <button type="button" onclick="document.getElementById('env-modal').close()" class="px-3.5 py-2 bg-slate-900 hover:bg-black text-white text-sm font-semibold rounded-md">Close</button>
+            </div>
+        </dialog>
+    @endif
 </x-admin-layout>

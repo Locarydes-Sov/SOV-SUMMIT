@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\Localrydes\SpecialOfferClient;
+use App\Services\Logs\EnvFileReader;
 use App\Services\Logs\LogFileReader;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ class LogController extends Controller
     public function __construct(
         private LogFileReader $reader,
         private SpecialOfferClient $client,
+        private EnvFileReader $env,
     ) {}
 
     public function index(Request $request): View
@@ -60,6 +62,7 @@ class LogController extends Controller
             'config' => $this->client->safeConfig(),
             'configCached' => app()->configurationIsCached(),
             'environment' => app()->environment(),
+            'envLines' => $request->user()?->isAdmin() ? $this->env->lines() : null,
         ]);
     }
 

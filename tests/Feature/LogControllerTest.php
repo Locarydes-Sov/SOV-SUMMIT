@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Services\Logs\EnvFileReader;
 use App\Services\Logs\LogFileReader;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\File;
@@ -159,5 +160,34 @@ class LogControllerTest extends TestCase
 
         $this->get(route('special-offers.index'))->assertSee('Fresh Davos Offer');
         Http::assertSentCount(2);
+    }
+
+    public function test_admin_sees_env_modal_with_secret_values_masked(): void
+    {
+        $envPath = $this->logDirectory.'/.env';
+        File::put($envPath, "# App\nAPP_NAME=\"SOV SUMMIT\"\nAPP_ENV=production\n\nDB_PASSWORD=super-secret-pass\nLOCALRYDES_API_KEY=abcdef9876\nMAIL_FROM_ADDRESS=info@sov-summit.com\n");
+        $this->app->instance(EnvFileReader::class, new EnvFileReader($envPath));
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->get(route('admin.logs.index'))
+            ->assertOk()
+            ->assertSee('View .env')
+            ->assertSee('id="env-modal"', false)
+            ->assertSee('APP_ENV')
+            ->assertSee('production')
+            ->assertSee('info@sov-summit.com')
+            ->assertSee('••••pass')
+            ->assertSee('••••9876')
+            ->assertDontSee('super-secret-pass')
+            ->assertDontSee('abcdef9876');
+    }
+
+    public function test_non_admin_user_does_not_see_env_modal(): void
+    {
+        $this->actingAs(User::factory()->create())
+            ->get(route('admin.logs.index'))
+            ->assertOk()
+            ->assertDontSee('View .env')
+            ->assertDontSee('id="env-modal"', false);
     }
 }
