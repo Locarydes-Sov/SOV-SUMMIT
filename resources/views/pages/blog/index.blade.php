@@ -5,8 +5,8 @@
 @section('canonical', url()->current())
 
 @push('head')
-<script type="application/ld+json">{!! '{"@context": "https://schema.org", "@type": "Blog", "name": "SOV SUMMIT Journal", "url": "https://sov-summit.com/blog", "publisher": {"@type": "Organization", "name": "SOV SUMMIT", "logo": "https://sov-summit.com/assets/img/logo.webp"}}' !!}</script>
-<script type="application/ld+json">{!! '{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "Journal", "item": "https://sov-summit.com/blog/"}]}' !!}</script>
+<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "Blog", "name": "SOV SUMMIT Journal", "url": "https://sov-summit.com/blog", "publisher": {"@type": "Organization", "name": "SOV SUMMIT", "logo": "https://sov-summit.com/assets/img/logo.webp"}}' !!}</script>
+<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "Journal", "item": "https://sov-summit.com/blog/"}]}' !!}</script>
 @endpush
 
 @section('breadcrumb')

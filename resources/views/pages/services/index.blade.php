@@ -6,7 +6,7 @@
 
 @push('head')
 <script type="application/ld+json">{!! json_encode([
-    '@context' => 'https://schema.org', '@type' => 'Organization',
+    '@@context' => 'https://schema.org', '@type' => 'Organization',
     'name' => 'SOV SUMMIT', 'legalName' => 'Sovereign Summit GmbH',
     'url' => 'https://sov-summit.com/', 'logo' => 'https://sov-summit.com/assets/img/logo.webp',
     'email' => 'info@sov-summit.com',
@@ -14,7 +14,7 @@
     'slogan' => 'People. Ideas. Impact.',
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
 <script type="application/ld+json">{!! json_encode([
-    '@context' => 'https://schema.org', '@type' => 'BreadcrumbList',
+    '@@context' => 'https://schema.org', '@type' => 'BreadcrumbList',
     'itemListElement' => [
         ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home',     'item' => url('/')],
         ['@type' => 'ListItem', 'position' => 2, 'name' => 'Services', 'item' => url('/services')],

@@ -5,7 +5,7 @@
 @section('canonical', 'https://sov-summit.com/privacy-policy/')
 
 @push('head')
-<script type="application/ld+json">{!! '{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://sov-summit.com/privacy-policy/"}]}' !!}</script>
+<script type="application/ld+json">{!! '{"@@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://sov-summit.com/"}, {"@type": "ListItem", "position": 2, "name": "Privacy Policy", "item": "https://sov-summit.com/privacy-policy/"}]}' !!}</script>
 @endpush
 
 @section('breadcrumb')

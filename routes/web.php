@@ -22,13 +22,18 @@ use App\Http\Controllers\SpecialOfferBookingController;
 use App\Http\Controllers\SpecialOfferController;
 use App\Models\Blog;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
 
 Route::get('/', function () {
+    $daysFromToday = DB::connection()->getDriverName() === 'sqlite'
+        ? "ABS(julianday(event_date) - julianday('now'))"
+        : 'ABS(TIMESTAMPDIFF(DAY, event_date, NOW()))';
+
     $featuredEvents = Event::published()
-        ->orderByRaw('event_date IS NULL, ABS(TIMESTAMPDIFF(DAY, event_date, NOW()))')
+        ->orderByRaw("event_date IS NULL, {$daysFromToday}")
         ->limit(3)
         ->get();
 
